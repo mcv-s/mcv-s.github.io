@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Accomplishments | Copilot-style Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-elevated: #0b1020;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.2);
+      --accent-strong: #818cf8;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --border-subtle: #1f2933;
+      --chip-bg: rgba(148, 163, 184, 0.12);
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.75);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 40%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1100px;
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+      border-radius: 28px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+    }
+
+    @media (max-width: 900px) {
+      .shell {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .sidebar {
+      padding: 28px 26px 26px;
+      border-right: 1px solid rgba(31, 41, 55, 0.9);
+      background: radial-gradient(circle at top left, rgba(79, 70, 229, 0.18), transparent 55%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sidebar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.12), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .sidebar-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #a5b4fc, #4f46e5);
+      box-shadow: 0 0 12px rgba(129, 140, 248, 0.9);
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 24px;
+      background: radial-gradient(circle at 30% 20%, #e5e7eb, #4b5563);
+      border: 2px solid rgba(148, 163, 184, 0.7);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 22px;
+      color: #0b1020;
+    }
+
+    .profile-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .profile-name {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .profile-role {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .profile-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      margin-bottom: 18px;
+    }
+
+    .chip {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--chip-bg);
+      font-size: 11px;
+      color: var(--text-muted);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .summary-card {
+      margin-top: 4px;
+      padding: 14px 14px 14px;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, rgba(79, 70, 229, 0.22), rgba(15, 23, 42, 0.96));
+      border: 1px solid rgba(129, 140, 248, 0.5);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
+    }
+
+    .summary-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-strong);
+      margin-bottom: 6px;
+    }
+
+    .summary-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .summary-highlight {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .stat-pill {
+      flex: 1 1 90px;
+      min-width: 0;
+      padding: 10px 11px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .stat-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .main {
+      padding: 26px 26px 24px;
+      background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.12), transparent 55%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .main::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 80% 0, rgba(79, 70, 229, 0.16), transparent 55%),
+        radial-gradient(circle at 10% 100%, rgba(16, 185, 129, 0.12), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .main-inner {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    .main-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .main-title {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .main-title span.spark {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: conic-gradient(from 180deg, #4f46e5, #22c55e, #06b6d4, #4f46e5);
+      box-shadow: 0 0 16px rgba(129, 140, 248, 0.9);
+    }
+
+    .main-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .view-toggle {
+      display: inline-flex;
+      padding: 3px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      gap: 2px;
+    }
+
+    .view-toggle button {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      cursor: default;
+    }
+
+    .view-toggle button.active {
+      background: linear-gradient(135deg, #4f46e5, #22c55e);
+      color: #f9fafb;
+      box-shadow: 0 0 12px rgba(79, 70, 229, 0.7);
+    }
+
+    .sections {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .section {
+      border-radius: var(--radius-lg);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 14px 14px 12px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .section-count {
+      font-size: 11px;
+      color: var(--accent-strong);
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .item-marker {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .item-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #a5b4fc, #4f46e5);
+      box-shadow: 0 0 10px rgba(129, 140, 248, 0.9);
+    }
+
+    .item-line {
+      flex: 1;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(55, 65, 81, 0.9), transparent);
+    }
+
+    .item-card {
+      border-radius: 14px;
+      padding: 9px 10px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .item-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .item-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .item-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .item-body {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .item-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .tag {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: var(--text-muted);
+    }
+
+    .tag.primary {
+      border-color: rgba(79, 70, 229, 0.9);
+      color: var(--accent-strong);
+      background: rgba(79, 70, 229, 0.12);
+    }
+
+    .section-footer {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .pill-link {
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--accent-strong);
+      text-decoration: none;
+      font-size: 11px;
+    }
+
+    .pill-link:hover {
+      border-color: rgba(129, 140, 248, 0.9);
+    }
+
+    .footer-note {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <!-- LEFT: Profile / Summary -->
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          Copilot-style overview generated for you
+        </div>
+
+        <header class="profile-header">
+          <div class="avatar">JD</div>
+          <div class="profile-main">
+            <div class="profile-name">Jordan Doe</div>
+            <div class="profile-role">Product leader · Engineer · Lifelong learner</div>
+          </div>
+        </header>
+
+        <div class="profile-meta">
+          <span class="chip">10+ years experience</span>
+          <span class="chip">Based in Atlanta, GA</span>
+          <span class="chip">Building at the intersection of UX & AI</span>
+        </div>
+
+        <section class="summary-card">
+          <div class="summary-title">Summary</div>
+          <p class="summary-text">
+            You’ve built a career around
+            <span class="summary-highlight">shipping thoughtful products</span>,
+            leading high-performing teams, and
+            <span class="summary-highlight">turning complex problems into clear, human experiences</span>.
+            Your work spans startups, global companies, and open-source communities.
+          </p>
+
+          <div class="stats-row">
+            <div class="stat-pill">
+              <div class="stat-label">Products launched</div>
+              <div class="stat-value">18</div>
+            </div>
+            <div class="stat-pill">
+              <div class="stat-label">Teams led</div>
+              <div class="stat-value">6</div>
+            </div>
+            <div class="stat-pill">
+              <div class="stat-label">Talks & workshops</div>
+              <div class="stat-value">24</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+    <!-- RIGHT: Accomplishments -->
+    <section class="main">
+      <div class="main-inner">
+        <header class="main-header">
+          <div class="main-title-block">
+            <h1 class="main-title">
+              <span class="spark"></span>
+              Accomplishments
+            </h1>
+            <p class="main-subtitle">
+              A curated view of milestones, impact, and work you’re proud of.
+            </p>
+          </div>
+
+          <div class="view-toggle" aria-hidden="true">
+            <button class="active">Timeline</button>
+            <button>By theme</button>
+          </div>
+        </header>
+
+        <div class="sections">
+          <!-- Career highlights -->
+          <section class="section">
+            <div class="section-header">
+              <h2 class="section-title">Career highlights</h2>
+              <span class="section-count">4 key milestones</span>
+            </div>
+
+            <div class="timeline">
+              <article class="item">
+                <div class="item-marker">
+                  <div class="item-dot"></div>
+                  <div class="item-line"></div>
+                </div>
+                <div class="item-card">
+                  <div class="item-top-row">
+                    <h3 class="item-title">Led launch of AI-powered analytics platform</h3>
+                    <span class="item-meta">2024 · Nimbus Labs</span>
+                  </div>
+                  <p class="item-body">
+                    Directed a cross-functional team of 12 to design, build, and launch a self-serve analytics
+                    platform used by over 3,000 customers within the first year, increasing expansion revenue by 27%.
+                  </p>
+                  <div class="item-tags">
+                    <span class="tag primary">Product leadership</span>
+                    <span class="tag">AI & data</span>
+                    <span class="tag">Go-to-market</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="item">
+                <div class="item-marker">
+                  <div class="item-dot"></div>
+                  <div class="item-line"></div>
+                </div>
+                <div class="item-card">
+                  <div class="item-top-row">
+                    <h3 class="item-title">Scaled design system across 5 product lines</h3>
+                    <span class="item-meta">2022 · Horizon Suite</span>
+                  </div>
+                  <p class="item-body">
+                    Created a unified design system and component library, reducing UI defects by 40% and cutting
+                    average feature delivery time by 18%.
+                  </p>
+                  <div class="item-tags">
+                    <span class="tag primary">Design systems</span>
+                    <span class="tag">Engineering collaboration</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="item">
+                <div class="item-marker">
+                  <div class="item-dot"></div>
+                  <div class="item-line"></div>
+                </div>
+                <div class="item-card">
+                  <div class="item-top-row">
+                    <h3 class="item-title">Founded and exited a SaaS startup</h3>
+                    <span class="item-meta">2018–2021 · Founder</span>
+                  </div>
+                  <p class="item-body">
+                    Bootstrapped a workflow automation tool from idea to acquisition, serving 400+ paying teams and
+                    maintaining a 96% customer satisfaction score.
+                  </p>
+                  <div class="item-tags">
+                    <span class="tag primary">Entrepreneurship</span>
+                    <span class="tag">B2B SaaS</span>
+                    <span class="tag">Customer discovery</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="item">
+                <div class="item-marker">
+                  <div class="item-dot"></div>
+                </div>
+                <div class="item-card">
+                  <div class="item-top-row">
+                    <h3 class="item-title">Transitioned from engineering to product leadership</h3>
+                    <span class="item-meta">2016 · Pivotal moment</span>
+                  </div>
+                  <p class="item-body">
+                    Moved from senior engineer to product manager, blending technical depth with user-centered thinking
+                    to drive roadmap decisions and strategy.
+                  </p>
+                  <div class="item-tags">
+                    <span class="tag primary">Career pivot</span>
+                    <span class="tag">Technical background</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="section-footer">
+              <span>Focused on impact, not just titles.</span>
+              <a href="#full-cv" class="pill-link">View full career history</a>
+            </div>
+          </section>
+
+          <!-- Awards & recognition -->
+          <section class="section">
+            <div class="section-header">
+              <h2 class="section-title">Awards & recognition</h2>
+              <span class="section-count">3 highlights</span>
+            </div>
+
+            <div class="timeline">
+              <article class="item">
+                <div class="item-marker">
+                  <div class="item-dot"></div>
+                  <div class="item-line"></div>
+                </div>
+                <div class="item-card">
+                  <div class="item-top-row">
+                    <h3 class="item-title">“Product Leader of the Year”</h3>
+                    <span class="item-meta">2023 · TechSouth Awards</span>
+                  </div>
+                  <p class="item-body">
+                    Recognized for driving measurable business outcomes, mentoring emerging leaders, and championing
+                    inclusive product practices.
+                  </p>
+                  <div class="item-tags">
+                    <span class="tag primary">Leadership</span>
+                    <span class="tag">Mentorship</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="item">
+                <div class="item-marker">
+                  <div class="item-dot"></div>
+                  <div class="item-line"></div>
+                </div>
+                <div class="item-card">
+                  <div class="item-top-row">
+                    <h3 class="item-title">Best UX in Enterprise App</h3>
+                    <span class="item-meta">2021 · Design Forward</span>
+                  </div>
+                  <p class="item-body">
+                    Awarded for a reimagined onboarding flow that reduced time-to-value by 60% for new enterprise
+                    customers.
+                  </p>
+                  <div class="item-tags">
+                    <span class="tag primary">UX excellence</span>
+                    <span class="tag">Onboarding</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="item">
+                <div class="item-marker">
+                  <div class="item-dot"></div>
+                </div>
+                <div class="item-card">
+                  <div class="item-top-row">
+                    <h3 class="item-title">Open-source maintainer</h3>
+                    <span class="item-meta">Ongoing · 3k+ stars</span>
+                  </div>
+                  <p class="item-body">
+                    Maintains a popular open-source toolkit for product analytics, used by teams worldwide and
+                    supported by an active contributor community.
+                  </p>
+                  <div class="item-tags">
+                    <span class="tag primary">Open source</span>
+                    <span class="tag">Community</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="section-footer">
+              <span>Recognition that reflects consistent, long-term work.</span>
+              <a href="#press" class="pill-link">See press & features</a>
+            </div>
+          </section>
+
+          <!-- Speaking & writing -->
+          <section class="section">
+            <div class="section-header">
+              <h2 class="section-title">Speaking & writing</h2>
+              <span class="section-count">Selected work</span>
+            </div>
+
+            <div class="timeline">
+              <article class="item">
+                <div class="item-marker">
+                  <div class="item-dot"></div>
+                  <div class="item-line"></div>
+                </div>
+                <div class="item-card">
+                  <div class="item-top-row">
+                    <h3 class="item-title">Keynote: “Designing with AI, not for AI”</h3>
+                    <span class="item-meta">2024 · Product North</span>
+                  </div>
+                  <p class="item-body">
+                    Explored practical frameworks for integrating AI into everyday products while keeping humans at the
+                    center of decision-making.
+                  </p>
+                  <div class="item-tags">
+                    <span class="tag primary">Conference talk</span>
+                    <span class="tag">AI & UX</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="item">
+                <div class="item-marker">
+                  <div class="item-dot"></div>
+                  <div class="item-line"></div>
+                </div>
+                <div class="item-card">
+                  <div class="item-top-row">
+                    <h3 class="item-title">Workshop: “From roadmap to narrative”</h3>
+                    <span class="item-meta">2023 · Internal enablement</span>
+                  </div>
+                  <p class="item-body">
+                    Built a storytelling framework used by PMs and engineers to communicate product strategy to
+                    executives and customers.
+                  </p>
+                  <div class="item-tags">
+                    <span class="tag primary">Workshops</span>
+                    <span class="tag">Storytelling</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="item">
+                <div class="item-marker">
+                  <div class="item-dot"></div>
+                </div>
+                <div class="item-card">
+                  <div class="item-top-row">
+                    <h3 class="item-title">Newsletter: “Signals, not noise”</h3>
+                    <span class="item-meta">Ongoing · 2k+ subscribers</span>
+                  </div>
+                  <p class="item-body">
+                    A monthly newsletter on product thinking, metrics, and building teams that ship with intention.
+                  </p>
+                  <div class="item-tags">
+                    <span class="tag primary">Writing</span>
+                    <span class="tag">Product strategy</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="section-footer">
+              <span>Sharing what you learn as you go.</span>
+              <a href="#writing" class="pill-link">Browse talks & articles</a>
+            </div>
+          </section>
+        </div>
+
+        <p class="footer-note">
+          This page is a curated snapshot. For full details, reach out or request a complete CV.
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
