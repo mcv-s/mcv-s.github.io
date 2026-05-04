@@ -1,5 +1,7 @@
 # mcvs.github.io
 
-This is such an unprofessional way to handle a website. 
+MarsChompsVenus is a developer. He knows the basics of several languages including the web suite: (HTML, JS, CSS) and Python.
 
-At least I know it and don't think it's normal.
+He uses this knowledge, along with AI, to create things.
+
+This is his website.
