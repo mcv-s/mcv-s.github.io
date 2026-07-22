@@ -32,7 +32,7 @@
     {
         "name": "Pynugget",
         "shortDescription": "Python-based browser game engine",
-        "longDescription": "A longer description of the project that appears when the project is opened.",
+        "longDescription": "Pynugget is a python-based in-browser alternative to scratch. It supports assets and shareable project files!",
         "image": "portfolio-images/Pynugget-Wide.png",
         "image-cover": "portfolio-images/Pynugget-Cover.svg",
         "date": "2026-07-22",
