@@ -1,0 +1,53 @@
+[
+    {
+        "name": "Folio",
+        "shortDescription": "Ultimate New Tab",
+        "longDescription": "Folio is a browser extension for chromium (Edge, Chrome, Brave) which allows customization of the new tab page.\n It was originally created for personal use because browser new tabs have too much junk on them.",
+        "image": "portfolio-images/Folio-Wide.png",
+        "image-cover": "portfolio-images/Folio-1.svg",
+        "date": "2026-07-22",
+        "github": "https://github.com/mcv-s/folio",
+        "website": "https://mcv-s.github.io/folio/"
+    },
+    {
+        "name": "Project Graveyard",
+        "shortDescription": "For all those things that don't make it here.",
+        "longDescription": "This one was vibe coded. An editor and viewer for project graveyards - websites with lots of dead projects displayed for all to see. Here's mine if anyone wants to know: https://tinyurl.com/ProjectGraveyard14910",
+        "image": "portfolio-images/Graveyard-Wide.png",
+        "image-cover": "portfolio-images/Graveyard-Cover.png",
+        "date": "2026-07-22",
+        "github": "https://github.com/mcv-s/projectgraveyard",
+        "website": "https://mcv-s.github.io/projectgraveyard/"
+    },
+    {
+        "name": "Dynamic Timer",
+        "shortDescription": "A timer which syncs to the cloud. This one counts UP.",
+        "longDescription": "A better timer site for you - it counts up infinitely, syncs to the cloud, and also has a TRMNL plugin and a PWA!",
+        "image": "portfolio-images/Dynamic-Timer-Wide.png",
+        "image-cover": "portfolio-images/Timer-2.svg",
+        "date": "2026-07-22",
+        "github": "https://github.com/mcv-s/dynamic-timer",
+        "website": "https://mcv-s.github.io/dynamic-timer/"
+    },
+    {
+        "name": "Pynugget",
+        "shortDescription": "Python-based browser game engine",
+        "longDescription": "A longer description of the project that appears when the project is opened.",
+        "image": "portfolio-images/Pynugget-Wide.png",
+        "image-cover": "portfolio-images/Pynugget-Cover.svg",
+        "date": "2026-07-22",
+        "github": "https://github.com/mcv-s/pynugget",
+        "website": "https://mcv-s.github.io/pynugget/"
+    },
+    {
+        "name": "Simple Timer",
+        "shortDescription": "A minimalist timer. This one counts DOWN.",
+        "longDescription": "A mimimalist timer. Good for long focus sessions.",
+        "image": "portfolio-images/Timer-Wide.png",
+        "image-cover": "portfolio-images/Timer-1.svg",
+        "date": "2026-07-22",
+        "github": "https://github.com/mcv-s/timer",
+        "website": "https://mcv-s.github.io/timer/"
+    }
+    
+]
