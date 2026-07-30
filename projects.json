@@ -48,6 +48,16 @@
         "date": "2026-07-22",
         "github": "https://github.com/mcv-s/timer",
         "website": "https://mcv-s.github.io/timer/"
+    },
+    {
+        "name": "Movie List",
+        "shortDescription": "Most of the movies I've watched, ranked",
+        "longDescription": "I got bored of using Apple Notes to store my movie ranking lists, so I had AI write this website. It uses an API to try and get data about the movie. Just don't use dates in the names :D - feel free to fork it on Github if you want to make your own!",
+        "image": "portfolio-images/MovieRanking-Wide.png",
+        "image-cover": "portfolio-images/MovieRanking-Cover.png",
+        "date": "2026-07-30",
+        "github": "https://github.com/mcv-s/movieranking",
+        "website": "https://mcv-s.github.io/movieranking/"
     }
     
 ]
