@@ -10,6 +10,36 @@
         "website": "https://mcv-s.github.io/folio/"
     },
     {
+        "name": "Pynugget",
+        "shortDescription": "Python-based browser game engine",
+        "longDescription": "Pynugget is a python-based in-browser alternative to scratch. It supports assets and shareable project files!",
+        "image": "portfolio-images/Pynugget-Wide.png",
+        "image-cover": "portfolio-images/Pynugget-Cover.svg",
+        "date": "2026-07-22",
+        "github": "https://github.com/mcv-s/pynugget",
+        "website": "https://mcv-s.github.io/pynugget/"
+    },
+    {
+        "name": "Markdown Editor+",
+        "shortDescription": "Markdown editor that isn't bad",
+        "longDescription": "A better markdown (.md) editor for you. Works as a PWA on Edge and Chrome and supports opening files directly!",
+        "image": "portfolio-images/MDEP-Wide.png",
+        "image-cover": "portfolio-images/MDEP-Cover.png",
+        "date": "2026-07-30",
+        "github": "https://github.com/mcv-s/markdown-editor-plus",
+        "website": "https://mcv-s.github.io/markdown-editor-plus/"
+    },
+    {
+        "name": "Movie List",
+        "shortDescription": "Most of the movies I've watched, ranked",
+        "longDescription": "I got bored of using Apple Notes to store my movie ranking lists, so I had AI write this website. It uses an API to try and get data about the movie. Just don't use dates in the names :D - feel free to fork it on Github if you want to make your own!",
+        "image": "portfolio-images/MovieRanking-Wide.png",
+        "image-cover": "portfolio-images/MovieRanking-Cover.png",
+        "date": "2026-07-30",
+        "github": "https://github.com/mcv-s/movieranking",
+        "website": "https://mcv-s.github.io/movieranking/"
+    },
+    {
         "name": "Project Graveyard",
         "shortDescription": "For all those things that don't make it here.",
         "longDescription": "This one was vibe coded. An editor and viewer for project graveyards - websites with lots of dead projects displayed for all to see. Here's mine if anyone wants to know: https://tinyurl.com/ProjectGraveyard14910",
@@ -30,16 +60,6 @@
         "website": "https://mcv-s.github.io/dynamic-timer/"
     },
     {
-        "name": "Pynugget",
-        "shortDescription": "Python-based browser game engine",
-        "longDescription": "Pynugget is a python-based in-browser alternative to scratch. It supports assets and shareable project files!",
-        "image": "portfolio-images/Pynugget-Wide.png",
-        "image-cover": "portfolio-images/Pynugget-Cover.svg",
-        "date": "2026-07-22",
-        "github": "https://github.com/mcv-s/pynugget",
-        "website": "https://mcv-s.github.io/pynugget/"
-    },
-    {
         "name": "Simple Timer",
         "shortDescription": "A minimalist timer. This one counts DOWN.",
         "longDescription": "A mimimalist timer. Good for long focus sessions.",
@@ -48,16 +68,5 @@
         "date": "2026-07-22",
         "github": "https://github.com/mcv-s/timer",
         "website": "https://mcv-s.github.io/timer/"
-    },
-    {
-        "name": "Movie List",
-        "shortDescription": "Most of the movies I've watched, ranked",
-        "longDescription": "I got bored of using Apple Notes to store my movie ranking lists, so I had AI write this website. It uses an API to try and get data about the movie. Just don't use dates in the names :D - feel free to fork it on Github if you want to make your own!",
-        "image": "portfolio-images/MovieRanking-Wide.png",
-        "image-cover": "portfolio-images/MovieRanking-Cover.png",
-        "date": "2026-07-30",
-        "github": "https://github.com/mcv-s/movieranking",
-        "website": "https://mcv-s.github.io/movieranking/"
     }
-    
 ]
