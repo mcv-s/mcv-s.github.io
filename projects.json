@@ -39,6 +39,16 @@
         "github": "https://github.com/mcv-s/movieranking",
         "website": "https://mcv-s.github.io/movieranking/"
     },
+        {
+        "name": "Eztools",
+        "shortDescription": "All the tools you'll ever need.",
+        "longDescription": "A collection of tools to replace my browser's 'tools' bookmarks folder. I technically didn't CODE this, I sort of designed it in framer.",
+        "image": "portfolio-images/EZTOOLS-Wide.png",
+        "image-cover": "portfolio-images/EZTOOLS-Cover.png",
+        "date": "2026-07-22",
+        "github": "",
+        "website": "https://eztools.framer.website/"
+    },
     {
         "name": "Project Graveyard",
         "shortDescription": "For all those things that don't make it here.",
