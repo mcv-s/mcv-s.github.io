@@ -77,9 +77,22 @@ async function loadProjects() {
         // MODAL CONTENT
         // ========================================
 
+        const modalImageLink = document.createElement("a");
+
+        modalImageLink.className = "project-modal-image-link";
+
+        modalImageLink.target = "_blank";
+
+        modalImageLink.rel = "noopener noreferrer";
+
+
         const modalImage = document.createElement("img");
 
         modalImage.className = "project-modal-image";
+
+        modalImageLink.appendChild(modalImage);
+
+
 
 
         const modalName = document.createElement("h2");
@@ -100,7 +113,7 @@ async function loadProjects() {
         // Add everything to modal
         modal.appendChild(closeButton);
 
-        modal.appendChild(modalImage);
+        modal.appendChild(modalImageLink);
 
         modal.appendChild(modalName);
 
@@ -251,6 +264,13 @@ async function loadProjects() {
 
 
                     modalLinks.appendChild(websiteLink);
+
+
+
+                    modalImageLink.href = project.website;
+
+                    modalImageLink.style.pointerEvents = "auto";
+                    modalImageLink.style.cursor = "pointer";
 
                 }
 
