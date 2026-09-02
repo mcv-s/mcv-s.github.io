@@ -485,7 +485,12 @@ style.textContent = `
 
         box-sizing: border-box;
 
-        background-color: #111111;
+        background-color: #111111b6;
+
+        border: 1.5px solid rgba(255, 255, 255, 0.05);
+
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
 
         border-radius: 16px;
 
