@@ -8,7 +8,9 @@
         scale: 1,
         spacing: 2.0,
 
+        charset: "`'.^,:;!|~+-_=<>?()[]{}*#$%&@",
         charset: "000001",
+
 
         // Color of the ASCII characters.
         color: [255, 255, 255],
@@ -25,7 +27,7 @@
 
         followSpeed: 100,
 
-        glow: 0.5,
+        glow: 1,
         aberration: 1,
 
         // Animation.
@@ -126,7 +128,7 @@
     canvas.style.width = "100%";
     canvas.style.pointerEvents = "none";
     canvas.style.zIndex = "-1";
-    canvas.style.opacity = "0.5";
+    canvas.style.opacity = "0.25";
 
     if (!options.fixedCanvas) {
         canvas.style.height = "100%";
@@ -411,7 +413,7 @@
 
                     right:
                         rect.right +
-                        options.textClearance*2,
+                        options.textClearance * 2,
 
                     top:
                         documentTop -
@@ -421,7 +423,7 @@
                     bottom:
                         documentBottom -
                         canvasTop +
-                        options.textClearance*1.5
+                        options.textClearance * 1.5
                 });
             }
         }

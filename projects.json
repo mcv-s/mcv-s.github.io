@@ -39,7 +39,7 @@
         "github": "https://github.com/mcv-s/movieranking",
         "website": "https://mcv-s.github.io/movieranking/"
     },
-        {
+    {
         "name": "Eztools",
         "shortDescription": "All the tools you'll ever need.",
         "longDescription": "A collection of tools to replace my browser's 'tools' bookmarks folder. I technically didn't CODE this, I sort of designed it in Framer.",
@@ -58,6 +58,16 @@
         "date": "2026-07-22",
         "github": "https://github.com/mcv-s/projectgraveyard",
         "website": "https://mcv-s.github.io/projectgraveyard/"
+    },
+    {
+        "name": "Keyframe Function Editor",
+        "shortDescription": "A simple editor for creating and editing keyframe functions.",
+        "longDescription": "A keyframe function editor. It allows you to create and edit keyframe functions for use in animations, game dev, and other applications. AI made it in about 10 minutes, and I edited it a bit. Designed for ",
+        "image": "portfolio-images/KFE-Wide.png",
+        "image-cover": "portfolio-images/KFE-Cover.png",
+        "date": "2026-07-22",
+        "github": "https://github.com/mcv-s/keyframe-function-editor",
+        "website": "https://mcv-s.github.io/keyframe-function-editor/"
     },
     {
         "name": "Dynamic Timer",
