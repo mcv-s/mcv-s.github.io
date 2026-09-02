@@ -2,13 +2,13 @@
     "use strict";
 
     const options = {
-        radius: 0.3,
+        radius: 0.45,
         softness: 1,
 
         scale: 1,
         spacing: 2.0,
 
-        charset: "001",
+        charset: "000001",
 
         // Color of the ASCII characters.
         color: [255, 255, 255],
@@ -23,9 +23,9 @@
         strength: 1,
         baseStrength: 0,
 
-        followSpeed: 10,
+        followSpeed: 100,
 
-        glow: 0.1,
+        glow: 0.5,
         aberration: 1,
 
         // Animation.
@@ -41,8 +41,9 @@
         textMaskUpdate: 250,
         textOpacity: 0.01,
 
-        trailDuration: 1500,
-        trailAlphaThreshold: 3,
+        trailDuration: 500,
+        trailAlphaThreshold: 5,
+
 
         /*
          * true:
@@ -52,7 +53,65 @@
          *   A full-document canvas that scrolls with the page.
          */
         fixedCanvas: false,
+        parallaxValue: 0.75,
     };
+
+
+
+    // const options = {
+    //     radius: 0.3,
+    //     softness: 1,
+
+    //     scale: 1,
+    //     spacing: 2.0,
+
+    //     charset: " 001",
+
+    //     // Color of the ASCII characters.
+    //     color: [255, 255, 255],
+
+    //     // Optional solid background behind the effect.
+    //     background: [0, 0, 0],
+    //     backgroundOpacity: 0,
+
+    //     contrast: 1.25,
+    //     brightness: 0,
+
+    //     strength: 1,
+    //     baseStrength: 0,
+
+    //     followSpeed: 100,
+
+    //     glow: 0.5,
+    //     aberration: 1,
+
+    //     // Animation.
+    //     waveStrength: 0,
+    //     waveSpeed: 1.8,
+    //     distortion: 0.12,
+
+    //     // Character animation.
+    //     characterJitter: 0,
+    //     characterSpeed: 5,
+
+    //     textClearance: 10,
+    //     textMaskUpdate: 250,
+    //     textOpacity: 0.01,
+
+    //     trailDuration: 5000,
+    //     trailAlphaThreshold: 5,
+
+
+    //     /*
+    //      * true:
+    //      *   One viewport-sized canvas that stays fixed while scrolling.
+    //      *
+    //      * false:
+    //      *   A full-document canvas that scrolls with the page.
+    //      */
+    //     fixedCanvas: false,
+    //     parallaxValue: 0.75,
+    // };
 
     const canvas = document.createElement("canvas");
 
@@ -352,7 +411,7 @@
 
                     right:
                         rect.right +
-                        options.textClearance,
+                        options.textClearance*2,
 
                     top:
                         documentTop -
@@ -362,7 +421,7 @@
                     bottom:
                         documentBottom -
                         canvasTop +
-                        options.textClearance
+                        options.textClearance*1.5
                 });
             }
         }
