@@ -335,7 +335,7 @@ style.textContent = `
 
         background-color: #7b7b7b1a;
 
-        border-radius: 12px;
+        border-radius: 15px;
 
         overflow: hidden;
 
@@ -346,6 +346,15 @@ style.textContent = `
             background-color 0.2s ease;
 
     }
+
+    
+
+.project {
+    backdrop-filter: blur(4px);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+
 
 
     .project:hover {
@@ -370,6 +379,8 @@ style.textContent = `
         height: 150px;
 
         object-fit: cover;
+
+        border-radius: inherit;
 
     }
 

@@ -5,20 +5,23 @@
 <head>
     <script src="index-program.js" defer></script>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="icon" href="favicon.png">
+    <link rel="icon" href="favicon.png">
 
 
 
-<title>MarsChompsVenus</title>
+    <title>MarsChompsVenus</title>
 
-<link rel="stylesheet" href="page-design.css">
+    <link rel="stylesheet" href="page-design.css">
 
 </head>
 
+<style>
 
+
+</style>
 
 
 
@@ -27,74 +30,198 @@
 <body>
 
 
-<!-- ========================================
+    <!-- ========================================
      MAIN CONTENT
 ======================================== -->
 
-<main class="content">
+    <main class="content">
 
-    <!-- ========================================
+        <!-- ========================================
          HEADER
     ======================================== -->
 
-    <header>
+
+        <div class="hero">
+
+            <header blur-panel>
+
+                <h1 class="site-title">
+                    MarsChompsVenus
+                </h1>
+
+                <nav class="navigation">
+
+                    <a href="https://marschompsvenus.itch.io/">
+                        Games
+                    </a>
+
+                    |
+
+                    <a href="https://github.com/mcv-s">
+                        Github
+                    </a>
+
+                    |
+
+                    <a href="/posts.html">
+                        Posts
+                    </a>
+
+                    <br>
+
+                    <a href="/links.html">
+                        All my links + accounts
+                    </a>
+
+                </nav>
+
+            </header>
 
 
-        <br>
-        <h1 class="site-title">
-            MarsChompsVenus
-        </h1>
+
+            <div class="scroll-down">
+                ↓ Scroll down ↓
+            </div>
 
 
-        <!-- Main Navigation -->
-
-        <nav class="navigation">
-
-            <a href="https://marschompsvenus.itch.io/">
-                Games
-            </a>
-
-            |
-
-            <a href="https://github.com/mcv-s">
-                Github
-            </a>
-
-            |
-
-            <a href="/posts">
-                Posts
-            </a>
-
-            <br>
-
-            <a href="/links.html">
-                All my links + accounts
-            </a>
-
-        </nav>
-
-    </header>
+        </div>
 
 
-    <!-- ========================================
+
+
+        <style>
+            .hero {
+                height: 100vh;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                text-align: center;
+
+                position: relative;
+            }
+
+
+
+            .scroll-down {
+                position: absolute;
+                bottom: 60px;
+
+                opacity: 0;
+                pointer-events: none;
+
+                transition: opacity 0.5s ease;
+            }
+
+            .scroll-down.visible {
+                opacity: 1;
+            }
+
+            .scroll-down.hidden {
+                opacity: 0;
+            }
+
+            @keyframes scrollDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-5px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+
+
+
+
+
+        <script>
+            const scrollDown = document.querySelector(".scroll-down");
+
+            // Show after 1 second if we're still at the top.
+            setTimeout(() => {
+                if (window.scrollY === 0) {
+                    scrollDown.classList.add("visible");
+                }
+            }, 1000);
+
+            window.addEventListener("scroll", () => {
+                if (window.scrollY === 0) {
+                    scrollDown.classList.add("visible");
+                } else {
+                    scrollDown.classList.remove("visible");
+                }
+            });
+
+
+            const heroHeader = document.querySelector(".hero header");
+
+            heroHeader.addEventListener("mousemove", (event) => {
+                const rect = heroHeader.getBoundingClientRect();
+
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                heroHeader.style.setProperty("--mouse-x", `${x}px`);
+                heroHeader.style.setProperty("--mouse-y", `${y}px`);
+            });
+        </script>
+
+
+
+
+
+
+        <section class="info">
+
+
+            <h2 class="section-title">
+
+                About me:
+
+            </h2> <br>
+
+
+
+            <div blur-panel>
+                Hey! I'm MarsChompsVenus, a creator focused in the digital medium. That means I make stuff for fun.
+            </div>
+
+
+            <br><br>
+
+        </section>
+
+
+
+
+
+
+
+        <!-- ========================================
          PORTFOLIO
     ======================================== -->
 
-    <section class="portfolio">
+        <section class="portfolio">
 
-        <h2 class="portfolio-title">
-            Portfolio:
-        </h2><br>
-
-
-        <!-- Add your projects here -->
+            <h2 class="section-title">
+                Portfolio:
+            </h2><br>
 
 
-    </section>
+            <!-- Add your projects here -->
 
 
-</main>
+        </section>
+
+
+        <br><br><br>
+
+    </main>
 
 
 </body>
@@ -104,4 +231,5 @@
 
 
 <script src="page-design.js"></script>
+
 </html>

@@ -7,16 +7,25 @@
     <link rel="icon" href="favicon.png">
     <title>MarsChompsVenus' Links</title>
 
+
+    <link rel="stylesheet" href="page-design.css">
+
+
     <style>
         .content1 {
+            min-height: 95vh;
             width: 500px;
+            max-width: calc(100% - 40px);
+
             margin: 0 auto;
+
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-
-        .title {
-            margin-bottom: 2px;
-        }
 
 
 
@@ -26,7 +35,7 @@
             /* vertically align icon + text */
             gap: 8px;
             /* space between icon and text */
-            box-shadow: 0 8px 8px rgba(0, 0, 0, 1);
+            filter: drop-shadow(0 0px 5px var(--accent-color));
         }
 
 
@@ -36,10 +45,14 @@
             align-items: center;
             gap: 15px;
         }
+
+        .sub {
+            text-align: center;
+        }
     </style>
 
 
-    <link rel="stylesheet" href="page-design.css">
+
 
 
 
@@ -48,9 +61,7 @@
 <body>
     <div class=content1>
 
-        <h4 class="sub">
-            <a href="/"> ‹ Back home</a>
-        </h4>
+
 
 
         <h1 style="text-align:center;">MarsChompsVenus' Links</h1>
@@ -60,7 +71,7 @@
 
 
 
-            <section class="links">
+            <section class="links" blur-panel>
 
 
                 <a class="link" href="https://marschompsvenus.itch.io/">
@@ -108,16 +119,16 @@
 
 
 
-                <h4 style="text-align: center; margin-top: 20px;">There's probably more links, feel free to <br> tell me
-                    any I missed through one of these.</h2>
-
-
-
-
-
-
-
             </section>
+
+
+            <h4 style="text-align: center; margin-top: 20px;">There's probably more links, feel free to <br> tell me
+                any I missed through one of these.</h2>
+
+
+                <h4 class="sub">
+                    <a href="/">Back home</a>
+                </h4>
 
 
 

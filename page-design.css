@@ -24,7 +24,7 @@
 
 
 ::selection {
-    background:  var(--accent-color);
+    background: var(--accent-color);
     color: #FFFFFF;
 }
 
@@ -142,12 +142,37 @@ a {
     margin-bottom: 10px;
 }
 
-
-
-
-
-.project {
-    backdrop-filter: blur(4px);
+.content1 {
+    width: 500px;
+    margin: 0 auto;
 }
 
 
+
+
+
+
+
+/* Subtle blurred panel behind the hero */
+[blur-panel] {
+    position: relative;
+    z-index: 1;
+
+    padding: 35px 50px;
+    padding: 7% 7%;
+
+    background: rgba(var(--background-color), 0.5);
+
+    border: 1.5px solid rgba(255, 255, 255, 0);
+    border-radius: 20px;
+
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(8px);
+
+    transition: border-color, backdrop-filter 0.4s ease;
+}
+
+[blur-panel]:hover {
+    border-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+}
