@@ -62,12 +62,22 @@
     {
         "name": "Keyframe Function Editor",
         "shortDescription": "A simple editor for creating and editing keyframe functions.",
-        "longDescription": "A keyframe function editor. It allows you to create and edit keyframe functions for use in animations, game dev, and other applications. AI made it in about 10 minutes, and I edited it a bit. Designed for ",
+        "longDescription": "A keyframe function editor. It allows you to create and edit keyframe functions for use in animations, game dev, and other applications. AI made it in about 10 minutes, and I edited it a bit. Designed for game development and such applications.",
         "image": "portfolio-images/KFE-Wide.png",
         "image-cover": "portfolio-images/KFE-Cover.png",
         "date": "2026-07-22",
         "github": "https://github.com/mcv-s/keyframe-function-editor",
         "website": "https://mcv-s.github.io/keyframe-function-editor/"
+    },
+    {
+        "name": "File Sorter",
+        "shortDescription": "Sort files into folders by type",
+        "longDescription": "A simple tool: press a button, select a folder, and then the folder is sorted by file extension. It doesn't touch any of the folders that were previously there.",
+        "image": "portfolio-images/File-Sorter-Wide.png",
+        "image-cover": "portfolio-images/File-Sorter-Cover.png",
+        "date": "2026-07-22",
+        "github": "https://github.com/mcv-s/file-sorter",
+        "website": "https://mcv-s.github.io/file-sorter/"
     },
     {
         "name": "Dynamic Timer",
