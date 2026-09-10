@@ -396,8 +396,7 @@ async function loadProjects() {
 
                                 aiPercentage.innerHTML =
                                     project.aiPercentage +
-                                    '% AI ' +
-                                    '<i class="ph ph-seal-check"></i>';
+                                    '% AI ';
 
                             }
 
