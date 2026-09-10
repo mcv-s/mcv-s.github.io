@@ -7,17 +7,21 @@
         "image-cover": "portfolio-images/Folio-1.svg",
         "date": "2026-07-22",
         "github": "https://github.com/mcv-s/folio",
-        "website": "https://mcv-s.github.io/folio/"
+        "website": "https://mcv-s.github.io/folio/",
+        "aiPercentage": "90",
+        "aiExplanation": "Mostly vibe-coded, with some modification by me"
     },
     {
         "name": "Pynugget",
         "shortDescription": "Python-based browser game engine",
-        "longDescription": "Pynugget is a python-based in-browser alternative to scratch. It supports assets and shareable project files!",
+        "longDescription": "Pynugget is a python-based in-browser alternative to [scratch](https://scratch.mit.edu/). It supports assets and shareable project files!",
         "image": "portfolio-images/Pynugget-Wide.png",
         "image-cover": "portfolio-images/Pynugget-Cover.svg",
         "date": "2026-07-22",
         "github": "https://github.com/mcv-s/pynugget",
-        "website": "https://mcv-s.github.io/pynugget/"
+        "website": "https://mcv-s.github.io/pynugget/",
+        "aiPercentage": "90",
+        "aiExplanation": "Mostly vibe-coded, with some modification by me"
     },
     {
         "name": "Markdown Editor+",
@@ -27,17 +31,9 @@
         "image-cover": "portfolio-images/MDEP-Cover.png",
         "date": "2026-07-30",
         "github": "https://github.com/mcv-s/markdown-editor-plus",
-        "website": "https://mcv-s.github.io/markdown-editor-plus/"
-    },
-    {
-        "name": "Movie List",
-        "shortDescription": "Most of the movies I've watched, ranked",
-        "longDescription": "I got bored of using Apple Notes to store my movie ranking lists, so I had AI write this website. It uses an API to try and get data about the movie. Just don't use dates in the names :D - feel free to fork it on Github if you want to make your own!",
-        "image": "portfolio-images/MovieRanking-Wide.png",
-        "image-cover": "portfolio-images/MovieRanking-Cover.png",
-        "date": "2026-07-30",
-        "github": "https://github.com/mcv-s/movieranking",
-        "website": "https://mcv-s.github.io/movieranking/"
+        "website": "https://mcv-s.github.io/markdown-editor-plus/",
+        "aiPercentage": "85",
+        "aiExplanation": "Another vibe coded tool"
     },
     {
         "name": "Eztools",
@@ -47,17 +43,43 @@
         "image-cover": "portfolio-images/EZTOOLS-Cover.png",
         "date": "2026-07-22",
         "github": "",
-        "website": "https://eztools.framer.website/"
+        "website": "https://eztools.framer.website/",
+        "aiPercentage": "0",
+        "aiExplanation": "No AI used"
+    },
+    {
+        "name": "My Website",
+        "shortDescription": "The website you're currently on.",
+        "longDescription": "My website with my portfolio, info, and relative links.",
+        "image": "portfolio-images/Website-Wide.png",
+        "image-cover": "portfolio-images/Default.svg",
+        "date": "2026-07-22",
+        "aiPercentage": "45",
+        "aiExplanation": "I completely coded the base site, \n then caved and used AI for some of it."
+    },
+    {
+        "name": "Movie List",
+        "shortDescription": "Most of the movies I've watched, ranked",
+        "longDescription": "I got bored of using Apple Notes to store my movie ranking lists, so I had AI write this website. It uses an API to try and get data about the movie. Just don't use dates in the names :D - feel free to fork it on Github if you want to make your own!",
+        "image": "portfolio-images/MovieRanking-Wide.png",
+        "image-cover": "portfolio-images/MovieRanking-Cover.png",
+        "date": "2026-07-30",
+        "github": "https://github.com/mcv-s/movieranking",
+        "website": "https://mcv-s.github.io/movieranking/",
+        "aiPercentage": "90",
+        "aiExplanation": "I used AI to make the site. List by me."
     },
     {
         "name": "Project Graveyard",
         "shortDescription": "For all those things that don't make it here.",
-        "longDescription": "This one was vibe coded. An editor and viewer for project graveyards - websites with lots of dead projects displayed for all to see. Here's mine if anyone wants to know: https://tinyurl.com/ProjectGraveyard14910",
+        "longDescription": "An editor and viewer for project graveyards - websites with lots of dead projects displayed for all to see. Here's mine if anyone wants to know: https://tinyurl.com/ProjectGraveyard14910",
         "image": "portfolio-images/Graveyard-Wide.png",
         "image-cover": "portfolio-images/Graveyard-Cover.png",
         "date": "2026-07-22",
         "github": "https://github.com/mcv-s/projectgraveyard",
-        "website": "https://mcv-s.github.io/projectgraveyard/"
+        "website": "https://mcv-s.github.io/projectgraveyard/",
+        "aiPercentage": "95",
+        "aiExplanation": "Mostly vibe-coded"
     },
     {
         "name": "Keyframe Function Editor",
@@ -67,7 +89,9 @@
         "image-cover": "portfolio-images/KFE-Cover.png",
         "date": "2026-07-22",
         "github": "https://github.com/mcv-s/keyframe-function-editor",
-        "website": "https://mcv-s.github.io/keyframe-function-editor/"
+        "website": "https://mcv-s.github.io/keyframe-function-editor/",
+        "aiPercentage": "100",
+        "aiExplanation": "Completely AI made"
     },
     {
         "name": "File Sorter",
@@ -77,7 +101,9 @@
         "image-cover": "portfolio-images/File-Sorter-Cover.png",
         "date": "2026-07-22",
         "github": "https://github.com/mcv-s/file-sorter",
-        "website": "https://mcv-s.github.io/file-sorter/"
+        "website": "https://mcv-s.github.io/file-sorter/",
+        "aiPercentage": "0",
+        "aiExplanation": "100% Human Generated Slop \n AI Used for research only"
     },
     {
         "name": "Dynamic Timer",
@@ -87,7 +113,9 @@
         "image-cover": "portfolio-images/Timer-2.svg",
         "date": "2026-07-22",
         "github": "https://github.com/mcv-s/dynamic-timer",
-        "website": "https://mcv-s.github.io/dynamic-timer/"
+        "website": "https://mcv-s.github.io/dynamic-timer/",
+        "aiPercentage": "0",
+        "aiExplanation": "100% Human Generated Slop"
     },
     {
         "name": "Simple Timer",
@@ -97,6 +125,8 @@
         "image-cover": "portfolio-images/Timer-1.svg",
         "date": "2026-07-22",
         "github": "https://github.com/mcv-s/timer",
-        "website": "https://mcv-s.github.io/timer/"
+        "website": "https://mcv-s.github.io/timer/",
+        "aiPercentage": "99",
+        "aiExplanation": "Basically all AI"
     }
 ]

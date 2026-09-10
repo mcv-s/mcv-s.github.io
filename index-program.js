@@ -73,6 +73,8 @@ async function loadProjects() {
         closeButton.addEventListener("click", closeModal);
 
 
+
+
         // ========================================
         // MODAL CONTENT
         // ========================================
@@ -100,14 +102,26 @@ async function loadProjects() {
         modalName.className = "project-modal-name";
 
 
+
         const modalLinks = document.createElement("div");
 
         modalLinks.className = "project-modal-links";
 
 
+
+        // AI percentage
+
+        const aiPercentage = document.createElement("h3");
+
+        aiPercentage.className = "project-modal-ai-percent";
+
+
+
         const modalDescription = document.createElement("p");
 
         modalDescription.className = "project-modal-description";
+
+
 
 
         // Add everything to modal
@@ -118,6 +132,8 @@ async function loadProjects() {
         modal.appendChild(modalName);
 
         modal.appendChild(modalLinks);
+
+        modal.appendChild(aiPercentage);
 
         modal.appendChild(modalDescription);
 
@@ -211,7 +227,15 @@ async function loadProjects() {
 
 
                 // Set description
-                modalDescription.textContent = project.longDescription;
+                modalDescription.innerHTML = marked.parse(project.longDescription);
+
+                if (project.aiPercentage == 0) {
+                    aiPercentage.innerHTML = '<i class="ph ph-seal-check"></i> '+ project.aiPercentage + '% AI ';
+                } else {
+                    aiPercentage.innerHTML = project.aiPercentage + '% AI <i class="ph ph-seal-check"></i>';
+                }
+
+                aiPercentage.setAttribute("data-tooltip", project.aiExplanation);
 
 
                 // Clear old links
@@ -597,10 +621,28 @@ style.textContent = `
 
         gap: 15px;
 
-        margin-bottom: 20px;
+        margin-bottom: 5px;
 
         flex-wrap: wrap;
 
+    }
+
+
+    /* AI percentage */ 
+
+
+    .project-modal-ai-percent {
+        display: flex;
+
+        justify-content: flex-start;
+
+        gap: 15px;
+
+        margin-bottom: 20px;
+
+        width: fit-content;
+
+        flex-wrap: wrap;
     }
 
 
@@ -618,6 +660,7 @@ style.textContent = `
 
         text-align: left;
 
+        white-space: pre-line;
     }
 
 
@@ -641,6 +684,14 @@ style.textContent = `
         }
 
     }
+
+
+
+    i {
+        margin-top: 3%;
+    }
+
+
 
 `;
 
