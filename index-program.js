@@ -9,14 +9,16 @@ async function loadProjects() {
 
     try {
 
-        // Load projects.json
+        // ========================================
+        // LOAD PROJECTS.JSON
+        // ========================================
+
         const response = await fetch("projects.json");
 
         if (!response.ok) {
             throw new Error("Could not load projects.json");
         }
 
-        // Convert JSON into JavaScript
         const projects = await response.json();
 
 
@@ -66,13 +68,10 @@ async function loadProjects() {
 
         closeButton.textContent = "×";
 
-        closeButton.setAttribute("aria-label", "Close project");
-
-
-        // Close modal when X is clicked
-        closeButton.addEventListener("click", closeModal);
-
-
+        closeButton.setAttribute(
+            "aria-label",
+            "Close project"
+        );
 
 
         // ========================================
@@ -81,245 +80,564 @@ async function loadProjects() {
 
         const modalImageLink = document.createElement("a");
 
-        modalImageLink.className = "project-modal-image-link";
+        modalImageLink.className =
+            "project-modal-image-link";
 
         modalImageLink.target = "_blank";
 
-        modalImageLink.rel = "noopener noreferrer";
+        modalImageLink.rel =
+            "noopener noreferrer";
 
 
         const modalImage = document.createElement("img");
 
-        modalImage.className = "project-modal-image";
+        modalImage.className =
+            "project-modal-image";
 
-        modalImageLink.appendChild(modalImage);
 
-
+        modalImageLink.appendChild(
+            modalImage
+        );
 
 
         const modalName = document.createElement("h2");
 
-        modalName.className = "project-modal-name";
-
+        modalName.className =
+            "project-modal-name";
 
 
         const modalLinks = document.createElement("div");
 
-        modalLinks.className = "project-modal-links";
+        modalLinks.className =
+            "project-modal-links";
 
 
-
-        // AI percentage
+        // ========================================
+        // AI PERCENTAGE
+        // ========================================
 
         const aiPercentage = document.createElement("h3");
 
-        aiPercentage.className = "project-modal-ai-percent";
+        aiPercentage.className =
+            "project-modal-ai-percent";
 
 
+        // ========================================
+        // MODAL DESCRIPTION
+        // ========================================
 
-        const modalDescription = document.createElement("p");
+        const modalDescription =
+            document.createElement("div");
 
-        modalDescription.className = "project-modal-description";
+        modalDescription.className =
+            "project-modal-description";
 
 
+        // ========================================
+        // ADD EVERYTHING TO MODAL
+        // ========================================
 
+        modal.appendChild(
+            closeButton
+        );
 
-        // Add everything to modal
-        modal.appendChild(closeButton);
+        modal.appendChild(
+            modalImageLink
+        );
 
-        modal.appendChild(modalImageLink);
+        modal.appendChild(
+            modalName
+        );
 
-        modal.appendChild(modalName);
+        modal.appendChild(
+            modalLinks
+        );
 
-        modal.appendChild(modalLinks);
+        modal.appendChild(
+            aiPercentage
+        );
 
-        modal.appendChild(aiPercentage);
-
-        modal.appendChild(modalDescription);
+        modal.appendChild(
+            modalDescription
+        );
 
 
         // Add modal to overlay
-        modalOverlay.appendChild(modal);
+        modalOverlay.appendChild(
+            modal
+        );
 
 
         // Add overlay to page
-        document.body.appendChild(modalOverlay);
+        document.body.appendChild(
+            modalOverlay
+        );
 
 
         // ========================================
-        // CLOSE WHEN CLICKING OUTSIDE
+        // CLOSE MODAL
         // ========================================
-
-        modalOverlay.addEventListener("click", closeModal);
-
 
         function closeModal() {
 
-            modalOverlay.classList.remove("visible");
+            modalOverlay.classList.remove(
+                "visible"
+            );
 
-            document.body.classList.remove("modal-open");
+            document.body.classList.remove(
+                "modal-open"
+            );
+
+        }
+
+
+        // Close button
+        closeButton.addEventListener(
+            "click",
+            closeModal
+        );
+
+
+        // Click outside modal
+        modalOverlay.addEventListener(
+            "click",
+            closeModal
+        );
+
+
+        // ========================================
+        // RENDER PROJECTS
+        // ========================================
+
+        function renderProjects(projectsToRender) {
+
+            // Clear current cards
+            projectList.innerHTML = "";
+
+
+            projectsToRender.forEach(project => {
+
+                // ========================================
+                // PROJECT CARD
+                // ========================================
+
+                const projectElement =
+                    document.createElement("article");
+
+                projectElement.className =
+                    "project";
+
+
+                // ========================================
+                // PROJECT IMAGE
+                // ========================================
+
+                const image =
+                    document.createElement("img");
+
+                const gridImageSrc =
+                    project["image-cover"] ||
+                    project.image;
+
+                image.src =
+                    gridImageSrc;
+
+                image.alt =
+                    project.name;
+
+                image.className =
+                    "project-image";
+
+
+                // ========================================
+                // PROJECT NAME
+                // ========================================
+
+                const name =
+                    document.createElement("h3");
+
+                name.textContent =
+                    project.name;
+
+                name.className =
+                    "project-name";
+
+
+                // ========================================
+                // PROJECT DESCRIPTION
+                // ========================================
+
+                const description =
+                    document.createElement("p");
+
+                description.textContent =
+                    project.shortDescription;
+
+                description.className =
+                    "project-description";
+
+
+                // ========================================
+                // ADD CARD CONTENT
+                // ========================================
+
+                projectElement.appendChild(
+                    image
+                );
+
+                projectElement.appendChild(
+                    name
+                );
+
+                projectElement.appendChild(
+                    description
+                );
+
+
+                // ========================================
+                // OPEN PROJECT MODAL
+                // ========================================
+
+                projectElement.addEventListener(
+                    "click",
+                    () => {
+
+                        // ========================================
+                        // MODAL IMAGE
+                        // ========================================
+
+                        modalImage.src =
+                            project.image;
+
+                        modalImage.alt =
+                            project.name;
+
+
+                        // ========================================
+                        // IMAGE WEBSITE LINK
+                        // ========================================
+
+                        if (
+                            project.website &&
+                            project.website !== "null"
+                        ) {
+
+                            modalImageLink.href =
+                                project.website;
+
+                            modalImageLink.style.pointerEvents =
+                                "auto";
+
+                            modalImageLink.style.cursor =
+                                "pointer";
+
+                        } else {
+
+                            modalImageLink.removeAttribute(
+                                "href"
+                            );
+
+                            modalImageLink.style.pointerEvents =
+                                "none";
+
+                            modalImageLink.style.cursor =
+                                "default";
+
+                        }
+
+
+                        // ========================================
+                        // PROJECT NAME
+                        // ========================================
+
+                        modalName.textContent =
+                            project.name;
+
+
+                        // ========================================
+                        // DESCRIPTION
+                        // ========================================
+
+                        if (
+                            typeof marked !== "undefined"
+                        ) {
+
+                            modalDescription.innerHTML =
+                                marked.parse(
+                                    project.longDescription || ""
+                                );
+
+                        } else {
+
+                            modalDescription.textContent =
+                                project.longDescription || "";
+
+                        }
+
+
+                        // ========================================
+                        // AI PERCENTAGE
+                        // ========================================
+
+                        if (
+                            project.aiPercentage != null
+                        ) {
+
+                            if (
+                                project.aiPercentage == 0
+                            ) {
+
+                                aiPercentage.innerHTML =
+                                    '<i class="ph ph-seal-check"></i> ' +
+                                    project.aiPercentage +
+                                    '% AI';
+
+                            } else {
+
+                                aiPercentage.innerHTML =
+                                    project.aiPercentage +
+                                    '% AI ' +
+                                    '<i class="ph ph-seal-check"></i>';
+
+                            }
+
+
+                            aiPercentage.setAttribute(
+                                "data-tooltip",
+                                project.aiExplanation || ""
+                            );
+
+                        } else {
+
+                            aiPercentage.innerHTML =
+                                "";
+
+                            aiPercentage.removeAttribute(
+                                "data-tooltip"
+                            );
+
+                        }
+
+
+                        // ========================================
+                        // CLEAR OLD LINKS
+                        // ========================================
+
+                        modalLinks.innerHTML =
+                            "";
+
+
+                        // ========================================
+                        // GITHUB LINK
+                        // ========================================
+
+                        if (
+                            project.github &&
+                            project.github !== "null"
+                        ) {
+
+                            const githubLink =
+                                document.createElement("a");
+
+                            githubLink.href =
+                                project.github;
+
+                            githubLink.textContent =
+                                "GitHub";
+
+                            githubLink.target =
+                                "_blank";
+
+                            githubLink.rel =
+                                "noopener noreferrer";
+
+
+                            modalLinks.appendChild(
+                                githubLink
+                            );
+
+                        }
+
+
+                        // ========================================
+                        // WEBSITE LINK
+                        // ========================================
+
+                        if (
+                            project.website &&
+                            project.website !== "null"
+                        ) {
+
+                            const websiteLink =
+                                document.createElement("a");
+
+                            websiteLink.href =
+                                project.website;
+
+                            websiteLink.textContent =
+                                "Website";
+
+                            websiteLink.target =
+                                "_blank";
+
+                            websiteLink.rel =
+                                "noopener noreferrer";
+
+
+                            modalLinks.appendChild(
+                                websiteLink
+                            );
+
+                        }
+
+
+                        // ========================================
+                        // SHOW MODAL
+                        // ========================================
+
+                        modalOverlay.classList.add(
+                            "visible"
+                        );
+
+                        document.body.classList.add(
+                            "modal-open"
+                        );
+
+                    }
+                );
+
+
+                // Add card to grid
+                projectList.appendChild(
+                    projectElement
+                );
+
+            });
 
         }
 
 
         // ========================================
-        // CREATE PROJECT CARDS
+        // INITIAL PROJECTS
         // ========================================
 
-        projects.forEach(project => {
-
-            // Create card
-            const projectElement = document.createElement("article");
-
-            projectElement.className = "project";
+        renderProjects(projects);
 
 
-            // Project image
-            const image = document.createElement("img");
+        // ========================================
+        // SEARCH BOX
+        // ========================================
 
-            const gridImageSrc = project["image-cover"] || project.image;
-
-            image.src = gridImageSrc;
-
-            image.alt = project.name;
-
-            image.className = "project-image";
+        const searchBox =
+            document.querySelector(".search-box");
 
 
-            // Project name
-            const name = document.createElement("h3");
+        if (searchBox) {
 
-            name.textContent = project.name;
+            searchBox.addEventListener(
+                "input",
+                () => {
 
-            name.className = "project-name";
-
-
-            // Short description
-            const description = document.createElement("p");
-
-            description.textContent = project.shortDescription;
-
-            description.className = "project-description";
+                    const search =
+                        searchBox.value
+                            .toLowerCase()
+                            .trim();
 
 
-            // Add content to card
-            projectElement.appendChild(image);
+                    // ========================================
+                    // EMPTY SEARCH
+                    // ========================================
 
-            projectElement.appendChild(name);
+                    if (!search) {
 
-            projectElement.appendChild(description);
+                        renderProjects(
+                            projects
+                        );
 
+                        return;
 
-            // ========================================
-            // OPEN PROJECT MODAL
-            // ========================================
-
-            projectElement.addEventListener("click", () => {
-
-                // Set image
-                modalImage.src = project.image;
-
-                modalImage.alt = project.name;
+                    }
 
 
-                // Set project name
-                modalName.textContent = project.name;
+                    // ========================================
+                    // SEARCH TERMS
+                    // ========================================
+
+                    const searchTerms =
+                        search.split(/\s+/);
 
 
-                // Set description
-                modalDescription.innerHTML = marked.parse(project.longDescription);
+                    // ========================================
+                    // FILTER PROJECTS
+                    // ========================================
 
-                if (project.aiPercentage == 0) {
-                    aiPercentage.innerHTML = '<i class="ph ph-seal-check"></i> '+ project.aiPercentage + '% AI ';
-                } else {
-                    aiPercentage.innerHTML = project.aiPercentage + '% AI <i class="ph ph-seal-check"></i>';
-                }
+                    const filteredProjects =
+                        projects.filter(
+                            project => {
 
-                aiPercentage.setAttribute("data-tooltip", project.aiExplanation);
-
-
-                // Clear old links
-                modalLinks.innerHTML = "";
-
-
-                // ========================================
-                // GITHUB LINK
-                // ========================================
-
-                if (
-                    project.github &&
-                    project.github !== "null"
-                ) {
-
-                    const githubLink = document.createElement("a");
-
-                    githubLink.href = project.github;
-
-                    githubLink.textContent = "GitHub";
-
-                    githubLink.target = "_blank";
-
-                    githubLink.rel = "noopener noreferrer";
+                                const tags =
+                                    (
+                                        project.tags ||
+                                        ""
+                                    ).toLowerCase();
 
 
-                    modalLinks.appendChild(githubLink);
+                                const name =
+                                    (
+                                        project.name ||
+                                        ""
+                                    ).toLowerCase();
+
+
+                                const description =
+                                    (
+                                        project.shortDescription ||
+                                        ""
+                                    ).toLowerCase();
+
+
+                                // Every search word must
+                                // match at least one field
+                                return searchTerms.every(
+                                    term =>
+                                        tags.includes(term) ||
+                                        name.includes(term) ||
+                                        description.includes(term)
+                                );
+
+                            }
+                        );
+
+
+                    // ========================================
+                    // DISPLAY RESULTS
+                    // ========================================
+
+                    renderProjects(
+                        filteredProjects
+                    );
 
                 }
+            );
+
+        }
 
 
-                // ========================================
-                // WEBSITE LINK
-                // ========================================
+        // ========================================
+        // ADD PROJECT GRID TO PORTFOLIO
+        // ========================================
 
-                if (
-                    project.website &&
-                    project.website !== "null"
-                ) {
-
-                    const websiteLink = document.createElement("a");
-
-                    websiteLink.href = project.website;
-
-                    websiteLink.textContent = "Website";
-
-                    websiteLink.target = "_blank";
-
-                    websiteLink.rel = "noopener noreferrer";
-
-
-                    modalLinks.appendChild(websiteLink);
-
-
-
-                    modalImageLink.href = project.website;
-
-                    modalImageLink.style.pointerEvents = "auto";
-                    modalImageLink.style.cursor = "pointer";
-
-                }
-
-
-                // Show modal
-                modalOverlay.classList.add("visible");
-
-                document.body.classList.add("modal-open");
-
-            });
-
-
-            // Add card to grid
-            projectList.appendChild(projectElement);
-
-        });
-
-
-        // Add project grid to portfolio
-        portfolio.appendChild(projectList);
+        portfolio.appendChild(
+            projectList
+        );
 
 
     } catch (error) {
 
-        console.error("Error loading projects:", error);
+        console.error(
+            "Error loading projects:",
+            error
+        );
 
     }
 
@@ -365,20 +683,15 @@ style.textContent = `
 
         cursor: pointer;
 
+        backdrop-filter: blur(4px);
+
+        border: 2px solid rgba(255, 255, 255, 0.05);
+
         transition:
             transform 0.2s ease,
             background-color 0.2s ease;
 
     }
-
-    
-
-.project {
-    backdrop-filter: blur(4px);
-    border: 2px solid rgba(255, 255, 255, 0.05);
-}
-
-
 
 
     .project:hover {
@@ -514,6 +827,7 @@ style.textContent = `
         border: 1.5px solid rgba(255, 255, 255, 0.05);
 
         backdrop-filter: blur(8px);
+
         -webkit-backdrop-filter: blur(8px);
 
         border-radius: 16px;
@@ -589,7 +903,8 @@ style.textContent = `
 
         border-radius: 18px;
 
-        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+        box-shadow:
+            0 10px 24px rgba(0, 0, 0, 0.25);
 
     }
 
@@ -628,10 +943,12 @@ style.textContent = `
     }
 
 
-    /* AI percentage */ 
-
+    /* ========================================
+       AI PERCENTAGE
+    ======================================== */
 
     .project-modal-ai-percent {
+
         display: flex;
 
         justify-content: flex-start;
@@ -643,6 +960,7 @@ style.textContent = `
         width: fit-content;
 
         flex-wrap: wrap;
+
     }
 
 
@@ -661,6 +979,7 @@ style.textContent = `
         text-align: left;
 
         white-space: pre-line;
+
     }
 
 
@@ -686,14 +1005,14 @@ style.textContent = `
     }
 
 
-
     i {
+
         margin-top: 3%;
+
     }
 
-
-
 `;
+
 
 document.head.appendChild(style);
 
@@ -703,4 +1022,3 @@ document.head.appendChild(style);
 // ========================================
 
 loadProjects();
-

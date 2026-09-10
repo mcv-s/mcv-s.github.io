@@ -9,7 +9,8 @@
         "github": "https://github.com/mcv-s/folio",
         "website": "https://mcv-s.github.io/folio/",
         "aiPercentage": "90",
-        "aiExplanation": "Mostly vibe-coded, with some modification by me"
+        "aiExplanation": "Mostly vibe-coded, with some modification by me",
+        "tags": "folio new tab ultimate"
     },
     {
         "name": "Pynugget",
@@ -21,7 +22,8 @@
         "github": "https://github.com/mcv-s/pynugget",
         "website": "https://mcv-s.github.io/pynugget/",
         "aiPercentage": "90",
-        "aiExplanation": "Mostly vibe-coded, with some modification by me"
+        "aiExplanation": "Mostly vibe-coded, with some modification by me",
+        "tags": "python py engine"
     },
     {
         "name": "Markdown Editor+",
@@ -33,7 +35,8 @@
         "github": "https://github.com/mcv-s/markdown-editor-plus",
         "website": "https://mcv-s.github.io/markdown-editor-plus/",
         "aiPercentage": "85",
-        "aiExplanation": "Another vibe coded tool"
+        "aiExplanation": "Another vibe coded tool",
+        "tags": "markdown md .md tool editor"
     },
     {
         "name": "Eztools",
@@ -45,7 +48,8 @@
         "github": "",
         "website": "https://eztools.framer.website/",
         "aiPercentage": "0",
-        "aiExplanation": "No AI used"
+        "aiExplanation": "No AI used",
+        "tags": "tools ez easy"
     },
     {
         "name": "My Website",
@@ -55,7 +59,8 @@
         "image-cover": "portfolio-images/Default.svg",
         "date": "2026-07-22",
         "aiPercentage": "45",
-        "aiExplanation": "I completely coded the base site, \n then caved and used AI for some of it."
+        "aiExplanation": "I completely coded the base site, \n then caved and used AI for some of it.",
+        "tags": "web site"
     },
     {
         "name": "Movie List",
@@ -67,7 +72,8 @@
         "github": "https://github.com/mcv-s/movieranking",
         "website": "https://mcv-s.github.io/movieranking/",
         "aiPercentage": "90",
-        "aiExplanation": "I used AI to make the site. List by me."
+        "aiExplanation": "I used AI to make the site. List by me.",
+        "tags": "movie movies list"
     },
     {
         "name": "Project Graveyard",
@@ -79,7 +85,8 @@
         "github": "https://github.com/mcv-s/projectgraveyard",
         "website": "https://mcv-s.github.io/projectgraveyard/",
         "aiPercentage": "95",
-        "aiExplanation": "Mostly vibe-coded"
+        "aiExplanation": "Mostly vibe-coded",
+        "tags": "project graveyard"
     },
     {
         "name": "Keyframe Function Editor",
@@ -91,7 +98,8 @@
         "github": "https://github.com/mcv-s/keyframe-function-editor",
         "website": "https://mcv-s.github.io/keyframe-function-editor/",
         "aiPercentage": "100",
-        "aiExplanation": "Completely AI made"
+        "aiExplanation": "Completely AI made",
+        "tags": "dev development"
     },
     {
         "name": "File Sorter",
@@ -103,7 +111,8 @@
         "github": "https://github.com/mcv-s/file-sorter",
         "website": "https://mcv-s.github.io/file-sorter/",
         "aiPercentage": "0",
-        "aiExplanation": "100% Human Generated Slop \n AI Used for research only"
+        "aiExplanation": "100% Human Generated Slop \n AI Used for research only",
+        "tags": "file files sort sorter directory noAI"
     },
     {
         "name": "Dynamic Timer",
@@ -115,7 +124,8 @@
         "github": "https://github.com/mcv-s/dynamic-timer",
         "website": "https://mcv-s.github.io/dynamic-timer/",
         "aiPercentage": "0",
-        "aiExplanation": "100% Human Generated Slop"
+        "aiExplanation": "100% Human Generated Slop",
+        "tags": "human timer time noAI"
     },
     {
         "name": "Simple Timer",
@@ -127,6 +137,7 @@
         "github": "https://github.com/mcv-s/timer",
         "website": "https://mcv-s.github.io/timer/",
         "aiPercentage": "99",
-        "aiExplanation": "Basically all AI"
+        "aiExplanation": "Basically all AI",
+        "tags": "human timer time"
     }
 ]
