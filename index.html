@@ -30,6 +30,35 @@
 
 <body>
 
+    <div static-blur-panel class="right-top">
+        Page visited X times
+    </div>
+
+    <style>
+        .right-top {
+            width: fit-content; 
+            padding: 15px; 
+            border-radius: 15px;
+            position: absolute;
+            right: 15px;
+            font-size: 5px;
+            opacity: 0;
+            display: flex;
+            gap: 5px;
+            transition: all ease 0.2s;
+        }
+
+        .right-top:hover {
+            opacity: 1;
+        }
+
+        #globe-icon {
+            margin-top: 0px !important;
+            font-size: 15px !important;
+        }
+    </style>
+
+
 
     <!-- ========================================
      MAIN CONTENT
@@ -216,7 +245,8 @@
                 <i> Projects, tools, and useful stuff</i>
             </h4><br>
 
-            <textarea style="padding: 3% 3%;" static-blur-panel class="search-box" placeholder='🔎︎ Search projects...' rows="1"></textarea>
+            <textarea style="padding: 3% 3%;" static-blur-panel class="search-box" placeholder='🔎︎ Search projects...'
+                rows="1"></textarea>
 
             <br><br>
 

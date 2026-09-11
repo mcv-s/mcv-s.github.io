@@ -350,6 +350,10 @@
 
                         const parent =
                             node.parentElement;
+                            
+                        if (parent.closest(".right-top")) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
 
                         if (!parent)
                             return NodeFilter.FILTER_REJECT;

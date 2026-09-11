@@ -1,7 +1,44 @@
+let doCountUpdates = true
+
+const page_counter = document.querySelector(".right-top");
+
+
+async function updateCounter() {
+
+
+    if (window.location.href.includes("mcv-s")) {
+        let times_visited = "37";
+        if (doCountUpdates) {
+            const response = await fetch(
+                "https://services.dumorando.com/dumocount.php?id=marschompsvenuswebsitevisits"
+            );
+            times_visited = await response.text();
+        }
+
+
+
+        page_counter.innerHTML = '<i class="ph ph-globe" id="globe-icon"></i> ' + `Page visited ${times_visited} times.`;
+    } else {
+        page_counter.innerHTML = "Not on main page!";
+    }
+
+}
+
+updateCounter();
+
+
+
+
+
+
 
 // ========================================
 // LOAD PROJECTS
 // ========================================
+
+
+
+
 
 async function loadProjects() {
 
