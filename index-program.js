@@ -40,18 +40,27 @@ updateCounter();
 async function updateStats() {
 
     const statRequest = await fetch("stats.json");
+    const itchRequest = await fetch("itch_game_data.json");
     const repoRequest = await fetch("https://api.github.com/users/mcv-s");
 
     const stats = await statRequest.json();
     const githubData = await repoRequest.json();
+    const itchData = await itchRequest.json();
+
+
     const repos = githubData.public_repos;
-    console.log(repos)
 
-    
+    console.log(repos);
+    console.log(itchData.games);
 
-    
+    var publishedGames = itchData.games.filter(game => game.published === true);
+
+    console.log(publishedGames);
+
+
+
     langsLink.innerHTML = `Languages (${stats.languages})`
-    gamesLink.innerHTML = `Games (${stats.gameCount})`
+    gamesLink.innerHTML = `Games (${publishedGames.length})`
     githubLink.innerHTML = `Github (${repos})`
 
 
