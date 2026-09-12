@@ -1,64 +1,5 @@
-let doCountUpdates = true
-
-const page_counter = document.querySelector(".right-top");
-const gamesLink = document.querySelector("#gamesLink");
-const githubLink = document.querySelector("#githubLink");
-const postsLink = document.querySelector("#postsLink");
-const langsLink = document.querySelector("#langsLink");
 
 
-
-
-async function updateCounter() {
-
-
-    if (window.location.href.includes("mcv-s")) {
-        let times_visited = "37";
-        if (doCountUpdates) {
-            const response = await fetch(
-                "https://services.dumorando.com/dumocount.php?id=marschompsvenuswebsitevisits"
-            );
-            times_visited = await response.text();
-        }
-
-
-
-        page_counter.innerHTML = '<i class="ph ph-globe" id="globe-icon"></i> ' + `Page visited ${times_visited} times.`;
-    } else {
-        page_counter.innerHTML = "Not on main page!";
-    }
-
-}
-
-updateCounter();
-
-
-
-
-
-
-async function updateStats() {
-
-    const statRequest = await fetch("stats.json");
-    const repoRequest = await fetch("https://api.github.com/users/mcv-s");
-
-    const stats = await statRequest.json();
-    const githubData = await repoRequest.json();
-    const repos = githubData.public_repos;
-    console.log(repos)
-
-    
-
-    
-    langsLink.innerHTML = `Languages (${stats.languages})`
-    gamesLink.innerHTML = `Games (${stats.gameCount})`
-    githubLink.innerHTML = `Github (${repos})`
-
-
-
-}
-
-updateStats();
 
 
 
@@ -81,7 +22,7 @@ async function loadProjects() {
         // LOAD PROJECTS.JSON
         // ========================================
 
-        const response = await fetch("projects.json");
+        const response = await fetch("langs.json");
 
         if (!response.ok) {
             throw new Error("Could not load projects.json");
@@ -180,15 +121,6 @@ async function loadProjects() {
             "project-modal-links";
 
 
-        // ========================================
-        // AI PERCENTAGE
-        // ========================================
-
-        const aiPercentage = document.createElement("h3");
-
-        aiPercentage.className =
-            "project-modal-ai-percent";
-
 
         // ========================================
         // MODAL DESCRIPTION
@@ -221,9 +153,6 @@ async function loadProjects() {
             modalLinks
         );
 
-        modal.appendChild(
-            aiPercentage
-        );
 
         modal.appendChild(
             modalDescription
@@ -363,221 +292,153 @@ async function loadProjects() {
 
 
                 // ========================================
-                // OPEN PROJECT MODAL
+                // OPEN PROJECT MODAL + BRIGHTNESS CHANGE FOR UNLEARNED
                 // ========================================
 
-                projectElement.addEventListener(
-                    "click",
-                    () => {
-
-                        // ========================================
-                        // MODAL IMAGE
-                        // ========================================
-
-                        modalImage.src =
-                            project.image;
-
-                        modalImage.alt =
-                            project.name;
 
 
-                        // ========================================
-                        // IMAGE WEBSITE LINK
-                        // ========================================
+                console.log(project.status)
 
-                        if (
-                            project.website &&
-                            project.website !== "null"
-                        ) {
-
-                            modalImageLink.href =
-                                project.website;
-
-                            modalImageLink.style.pointerEvents =
-                                "auto";
-
-                            modalImageLink.style.cursor =
-                                "pointer";
-
-                        } else {
-
-                            modalImageLink.removeAttribute(
-                                "href"
-                            );
-
-                            modalImageLink.style.pointerEvents =
-                                "none";
-
-                            modalImageLink.style.cursor =
-                                "default";
-
-                        }
+                if (project.status !== "learned") {
+                    projectElement.style.opacity = 0.8;
+                    projectElement.style.filter = "brightness(75%)";
+                    projectElement.setAttribute("data-tooltip", "Not yet learned.")
+                } else {
 
 
-                        // ========================================
-                        // PROJECT NAME
-                        // ========================================
+                    projectElement.addEventListener(
+                        "click",
+                        () => {
 
-                        modalName.textContent =
-                            project.name;
+                            // ========================================
+                            // MODAL IMAGE
+                            // ========================================
 
+                            modalImage.src =
+                                project.image;
 
-                        // ========================================
-                        // DESCRIPTION
-                        // ========================================
-
-                        if (
-                            typeof marked !== "undefined"
-                        ) {
-
-                            modalDescription.innerHTML =
-                                marked.parse(
-                                    project.longDescription || ""
-                                );
-
-                        } else {
-
-                            modalDescription.textContent =
-                                project.longDescription || "";
-
-                        }
+                            modalImage.alt =
+                                project.name;
 
 
-                        // ========================================
-                        // AI PERCENTAGE
-                        // ========================================
-
-                        if (
-                            project.aiPercentage != null
-                        ) {
+                            // ========================================
+                            // IMAGE WEBSITE LINK
+                            // ========================================
 
                             if (
-                                project.aiPercentage == 0
+                                project.website &&
+                                project.website !== "null"
                             ) {
 
-                                aiPercentage.innerHTML =
-                                    '<i class="ph ph-seal-check"></i> ' +
-                                    project.aiPercentage +
-                                    '% AI';
+                                modalImageLink.href =
+                                    project.website;
+
+                                modalImageLink.style.pointerEvents =
+                                    "auto";
+
+                                modalImageLink.style.cursor =
+                                    "pointer";
 
                             } else {
 
-                                aiPercentage.innerHTML =
-                                    project.aiPercentage +
-                                    '% AI ';
+                                modalImageLink.removeAttribute(
+                                    "href"
+                                );
+
+                                modalImageLink.style.pointerEvents =
+                                    "none";
+
+                                modalImageLink.style.cursor =
+                                    "default";
 
                             }
 
 
-                            aiPercentage.setAttribute(
-                                "data-tooltip",
-                                project.aiExplanation || ""
-                            );
+                            // ========================================
+                            // PROJECT NAME
+                            // ========================================
 
-                        } else {
+                            modalName.textContent =
+                                project.name;
 
-                            aiPercentage.innerHTML =
+
+                            // ========================================
+                            // DESCRIPTION
+                            // ========================================
+
+                            if (
+                                typeof marked !== "undefined"
+                            ) {
+
+                                modalDescription.innerHTML =
+                                    marked.parse(
+                                        project.longDescription || ""
+                                    );
+
+                            } else {
+
+                                modalDescription.textContent =
+                                    project.longDescription || "";
+
+                            }
+
+
+
+                            // ========================================
+                            // CLEAR OLD LINKS
+                            // ========================================
+
+                            modalLinks.innerHTML =
                                 "";
 
-                            aiPercentage.removeAttribute(
-                                "data-tooltip"
+                            // ========================================
+                            // WEBSITES
+                            // ========================================
+
+                            if (
+                                project.websites &&
+                                project.websites !== "null"
+                            ) {
+
+                                modalLinks.innerHTML =
+                                    marked.parse(project.websites);
+
+                            }
+
+
+                            // ========================================
+                            // SHOW MODAL
+                            // ========================================
+
+                            modalOverlay.classList.add(
+                                "visible"
+                            );
+
+                            document.body.classList.add(
+                                "modal-open"
                             );
 
                         }
+                    );
+                }
 
 
-                        // ========================================
-                        // CLEAR OLD LINKS
-                        // ========================================
-
-                        modalLinks.innerHTML =
-                            "";
 
 
-                        // ========================================
-                        // GITHUB LINK
-                        // ========================================
-
-                        if (
-                            project.github &&
-                            project.github !== "null"
-                        ) {
-
-                            const githubLink =
-                                document.createElement("a");
-
-                            githubLink.href =
-                                project.github;
-
-                            githubLink.textContent =
-                                "GitHub";
-
-                            githubLink.target =
-                                "_blank";
-
-                            githubLink.rel =
-                                "noopener noreferrer";
 
 
-                            modalLinks.appendChild(
-                                githubLink
-                            );
-
-                        }
 
 
-                        // ========================================
-                        // WEBSITE LINK
-                        // ========================================
-
-                        if (
-                            project.website &&
-                            project.website !== "null"
-                        ) {
-
-                            const websiteLink =
-                                document.createElement("a");
-
-                            websiteLink.href =
-                                project.website;
-
-                            websiteLink.textContent =
-                                "Website";
-
-                            websiteLink.target =
-                                "_blank";
-
-                            websiteLink.rel =
-                                "noopener noreferrer";
 
 
-                            modalLinks.appendChild(
-                                websiteLink
-                            );
-
-                        }
-
-
-                        // ========================================
-                        // SHOW MODAL
-                        // ========================================
-
-                        modalOverlay.classList.add(
-                            "visible"
-                        );
-
-                        document.body.classList.add(
-                            "modal-open"
-                        );
-
-                    }
-                );
 
 
                 // Add card to grid
                 projectList.appendChild(
                     projectElement
                 );
+
+
 
             });
 
@@ -1089,9 +950,3 @@ document.head.appendChild(style);
 // ========================================
 
 loadProjects();
-
-
-
-
-
-

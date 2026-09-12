@@ -1,0 +1,79 @@
+[
+    {
+        "name": "Blockly",
+        "shortDescription": "Not REALLY an achievement.",
+        "longDescription": "I started learning block coding with a program called [microbit](https://makecode.microbit.org/) - from there I moved on to [Microsoft Makecode Arcade](https://arcade.makecode.com/), after which I finally graduated to [Scratch](https://scratch.mit.edu/users/MarsChompsVenus/).",
+        "image": "Blockly-Cover.png",
+        "image-cover": "Blockly-Cover.png",
+        "date": "2026-07-22",
+        "websites": "[Scratch Profile](https://scratch.mit.edu/users/MarsChompsVenus/)",
+        "tags": "block language scratch",
+        "status": "learned"
+    },
+    {
+        "name": "Python",
+        "shortDescription": "My first REAL language!",
+        "longDescription": "I've known python for a while. I took some classes on it a while back, which definitely helped. Still haven't made the default portfolio projects in it yet though.",
+        "image": "Python-Cover.png",
+        "image-cover": "Python-Cover.png",
+        "date": "2026-07-22",
+        "websites": "",
+        "tags": "python py engine",
+        "status": "learned"
+    },
+    {
+        "name": "Web Trio",
+        "shortDescription": "My favorite language!",
+        "longDescription": "I make a lot of stuff in html. This website, other websites . . . go look at my [portfolio](https://mcv-s.github.io/).",
+        "image": "Web-Cover.png",
+        "image-cover": "Web-Cover.png",
+        "date": "2026-07-22",
+        "websites": "",
+        "tags": "web HTML technology trio JS CSS",
+        "status": "learned"
+    },
+    {
+        "name": "C++",
+        "shortDescription": "In progress",
+        "longDescription": "Haven't learned this one yet!",
+        "image": "CPP-Cover.png",
+        "image-cover": "CPP-Cover.png",
+        "date": "2026-07-22",
+        "websites": "",
+        "tags": "web HTML technology trio JS CSS",
+        "status": "in-progress"
+    },
+    {
+        "name": "C#",
+        "shortDescription": "In progress",
+        "longDescription": "Haven't learned this one yet!",
+        "image": "CS-Cover.png",
+        "image-cover": "CS-Cover.png",
+        "date": "2026-07-22",
+        "websites": "",
+        "tags": "web HTML technology trio JS CSS",
+        "status": "in-progress"
+    },
+    {
+        "name": "Swift",
+        "shortDescription": "In progress",
+        "longDescription": "Haven't learned this one yet!",
+        "image": "Swift-Cover.png",
+        "image-cover": "Swift-Cover.png",
+        "date": "2026-07-22",
+        "websites": "",
+        "tags": "web HTML technology trio JS CSS",
+        "status": "in-progress"
+    },
+    {
+        "name": "Lua",
+        "shortDescription": "In progress",
+        "longDescription": "Haven't learned this one yet!",
+        "image": "Lua-Cover.png",
+        "image-cover": "Lua-Cover.png",
+        "date": "2026-07-22",
+        "websites": "",
+        "tags": "web HTML technology trio JS CSS",
+        "status": "in-progress"
+    }
+]
