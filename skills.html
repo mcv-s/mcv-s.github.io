@@ -628,6 +628,170 @@
     }
 
 
+    .view-mode-button {
+        width: auto;
+        min-width: 38px;
+        padding: 0 10px;
+        font-size: 12px;
+    }
+
+
+    .skills-page.list-mode .graph-viewport {
+        overflow-y: auto;
+        overflow-x: hidden;
+        cursor: default;
+    }
+
+
+    .skills-page.list-mode .graph-grid,
+    .skills-page.list-mode .connections {
+        display: none;
+    }
+
+
+    .skills-page.list-mode .graph-plane {
+        position: static;
+        width: auto;
+        height: auto;
+        min-height: 100%;
+        padding: 90px 20px 80px;
+        box-sizing: border-box;
+        transform: none !important;
+        position: relative;
+    }
+
+
+    .skills-page.list-mode #nodes {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+
+    .skills-page.list-mode .skill-node {
+        position: relative;
+        left: auto !important;
+        top: auto !important;
+        width: min(100%, 520px);
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr);
+        column-gap: 14px;
+        align-items: center;
+        padding: 12px 16px;
+        transform: none;
+        text-align: left;
+    }
+
+
+    .node-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .node-content .node-name {
+        order: 1;
+    }
+
+
+    .node-content .node-description {
+        order: 2;
+    }
+
+
+    .skills-page.list-mode .skill-node:hover {
+        transform: scale(1.01);
+    }
+
+
+    .skills-page.list-mode .node-icon {
+        grid-column: 1;
+        grid-row: 1 / span 3;
+        margin: 0;
+        text-align: center;
+    }
+
+
+    .skills-page.list-mode .node-content {
+        grid-column: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        min-width: 0;
+    }
+
+
+    .skills-page.list-mode .node-description {
+        order: 2;
+    }
+
+
+    .skills-page.list-mode .node-name {
+        order: 1;
+        margin: 0;
+    }
+
+
+    .skills-page.list-mode .node-percentage {
+        grid-column: 2;
+        width: 100%;
+        margin-top: 8px;
+    }
+
+
+    .skills-page.list-mode .node-percentage-text {
+        grid-column: 2;
+        margin-top: 3px;
+    }
+
+
+    .skills-page.list-mode .start-label {
+        grid-column: 2;
+        grid-row: 4;
+        margin-top: 2px;
+    }
+
+
+    .skills-page.list-mode .skill-node.dimmed {
+        opacity: 0.68;
+    }
+
+
+    .list-connections {
+        display: none;
+    }
+
+
+    .skills-page.list-mode .list-connections {
+        display: block;
+        position: absolute;
+        top: 90px;
+        right: 20px;
+        bottom: 80px;
+        left: 20px;
+        width: auto;
+        height: auto;
+        z-index: 1;
+        pointer-events: none;
+        overflow: visible;
+    }
+
+
+    .list-connection {
+        stroke: rgba(170, 77, 4, 0.2);
+        stroke-width: 1.5;
+        fill: none;
+        transition: stroke 0.2s ease, stroke-width 0.2s ease;
+    }
+
+
+    .list-connection.highlighted {
+        stroke: var(--accent-color);
+        stroke-width: 2.5;
+    }
+
+
     .control-button {
 
         width: 38px;
@@ -733,6 +897,7 @@
             <div class="graph-plane" id="graphPlane">
 
                 <svg class="connections" id="connections"></svg>
+                <svg class="list-connections" id="listConnections"></svg>
 
                 <div id="nodes"></div>
 
@@ -833,6 +998,15 @@
                 <i class="ph ph-plus"></i>
             </button>
 
+
+            <button class="control-button view-mode-button" id="viewModeToggle" title="Switch to list mode">
+                List
+            </button>
+
+            <button class="control-button view-mode-button" id="sortToggle" title="Sort list" hidden>
+                <i class="ph ph-funnel"></i>
+            </button>
+
         </div>
 
 
@@ -906,6 +1080,94 @@
         const infoButton =
             document.querySelector("#info-button");
 
+        const skillsPage =
+            document.querySelector(".skills-page");
+
+        const viewModeToggle =
+            document.querySelector("#viewModeToggle");
+
+        const sortToggle =
+            document.querySelector("#sortToggle");
+
+        const listConnectionsSvg =
+            document.querySelector("#listConnections");
+
+        const VIEW_MODE_STORAGE_KEY =
+            "skills-view-mode";
+
+        const SORT_STORAGE_KEY =
+            "skills-sort-mode";
+
+        const sortModes = ["json", "alphabetical", "progress"];
+
+        let sortMode = sortModes.includes(
+            localStorage.getItem(SORT_STORAGE_KEY)
+        )
+            ? localStorage.getItem(SORT_STORAGE_KEY)
+            : "json";
+
+        let viewMode =
+            localStorage.getItem(VIEW_MODE_STORAGE_KEY) === "list"
+                ? "list"
+                : "tree";
+
+
+        function applyViewMode() {
+
+            skillsPage.classList.toggle(
+                "list-mode",
+                viewMode === "list"
+            );
+
+            viewModeToggle.innerHTML =
+                viewMode === "list" ? '<i class="ph ph-graph"></i>' : '<i class="ph ph-list"></i>';
+
+            viewModeToggle.title =
+                viewMode === "list"
+                    ? "Switch to tree mode"
+                    : "Switch to list mode";
+
+            sortToggle.hidden = viewMode !== "list";
+
+        }
+
+
+        viewModeToggle.addEventListener("click", event => {
+
+            event.stopPropagation();
+
+            viewMode = viewMode === "list" ? "tree" : "list";
+
+            localStorage.setItem(
+                VIEW_MODE_STORAGE_KEY,
+                viewMode
+            );
+
+            applyViewMode();
+
+            if (viewMode === "tree") {
+                resetView();
+            }
+
+        });
+
+
+        sortToggle.addEventListener("click", event => {
+
+            event.stopPropagation();
+
+            sortMode = sortModes[
+                (sortModes.indexOf(sortMode) + 1) % sortModes.length
+            ];
+
+            localStorage.setItem(SORT_STORAGE_KEY, sortMode);
+            renderNodes();
+            renderListConnections();
+
+        });
+
+        applyViewMode();
+
 
         infoButton.addEventListener("click", () => {
             showInfo()
@@ -962,6 +1224,8 @@
         ========================================================= */
 
         let nodePositions = {};
+
+        let skillLayers = new Map();
 
         let scale = 1;
 
@@ -1201,6 +1465,8 @@
                 );
 
             }
+
+            skillLayers = new Map(distances);
 
 
 
@@ -1746,7 +2012,22 @@
             nodesContainer.innerHTML = "";
 
 
-            skills.forEach(skill => {
+            const skillsToRender =
+                viewMode === "list" && sortMode === "alphabetical"
+                    ? [...skills].sort((a, b) =>
+                        String(a.name).localeCompare(String(b.name))
+                    )
+                    : viewMode === "list" && sortMode === "progress"
+                        ? [...skills].sort((a, b) => {
+                            const aUnknown = a.learnedPercentage === "???";
+                            const bUnknown = b.learnedPercentage === "???";
+                            if (aUnknown !== bUnknown) return aUnknown ? 1 : -1;
+                            return Number(b.learnedPercentage) - Number(a.learnedPercentage);
+                        })
+                        : skills;
+
+
+            skillsToRender.forEach(skill => {
 
                 const element =
                     document.createElement("div");
@@ -1841,14 +2122,17 @@
                 </div>
 
 
-                <h3 class="node-name">
-                    ${escapeHtml(skill.name)}
-                </h3>
+                <div class="node-content">
 
+                    <p class="node-description">
+                        ${escapeHtml(skill.shortDescription)}
+                    </p>
 
-                <p class="node-description">
-                    ${escapeHtml(skill.shortDescription)}
-                </p>
+                    <h3 class="node-name">
+                        ${escapeHtml(skill.name)}
+                    </h3>
+
+                </div>
 
 
                 ${percentageBarObject}
@@ -1887,6 +2171,64 @@
                     }
                 );
 
+            });
+
+            if (viewMode === "list") {
+                requestAnimationFrame(renderListConnections);
+            }
+
+        }
+
+
+        function renderListConnections() {
+
+            if (viewMode !== "list") {
+                listConnectionsSvg.innerHTML = "";
+                return;
+            }
+
+            const nodes = [...nodesContainer.querySelectorAll(".skill-node")];
+            const byId = new Map(nodes.map(node => [node.dataset.id, node]));
+            const width = nodesContainer.clientWidth;
+            const height = nodesContainer.scrollHeight;
+
+            listConnectionsSvg.setAttribute("viewBox", `50 90 ${width} ${height}`);
+            listConnectionsSvg.innerHTML = "";
+
+            const drawn = new Set();
+            skills.forEach(skill => {
+                const from = byId.get(skill.id);
+                if (!from || !Array.isArray(skill.connections)) return;
+
+                skill.connections.forEach(connectionId => {
+                    const to = byId.get(connectionId);
+                    const key = [skill.id, connectionId].sort().join("-");
+                    if (!to || drawn.has(key)) return;
+                    drawn.add(key);
+
+                    const line = document.createElementNS(
+                        "http://www.w3.org/2000/svg", "path"
+                    );
+                    line.classList.add("list-connection");
+                    line.dataset.from = skill.id;
+                    line.dataset.to = connectionId;
+
+                    const y1 = from.offsetTop + from.offsetHeight / 2;
+                    const y2 = to.offsetTop + to.offsetHeight / 2;
+                    const cardLeft = Math.min(from.offsetLeft, to.offsetLeft);
+                    const fromLayer = skillLayers.get(skill.id) ?? 0;
+                    const toLayer = skillLayers.get(connectionId) ?? 0;
+                    const connectionLayer = Math.max(fromLayer, toLayer);
+                    const lane = Math.max(
+                        cardLeft - 18 - connectionLayer * 14,
+                        0
+                    );
+                    line.setAttribute(
+                        "d",
+                        `M ${cardLeft} ${y1} H ${lane} V ${y2} H ${cardLeft}`
+                    );
+                    listConnectionsSvg.appendChild(line);
+                });
             });
 
         }
@@ -2198,6 +2540,10 @@
         graphViewport.addEventListener(
             "wheel",
             event => {
+
+                if (viewMode === "list") {
+                    return;
+                }
 
                 event.preventDefault();
 
@@ -2524,6 +2870,15 @@
 
                 });
 
+            document
+                .querySelectorAll(".list-connection")
+                .forEach(line => {
+                    const connected =
+                        line.dataset.from === selectedId ||
+                        line.dataset.to === selectedId;
+                    line.classList.toggle("highlighted", connected);
+                });
+
         }
 
 
@@ -2594,6 +2949,10 @@
                     );
 
                 });
+
+            document
+                .querySelectorAll(".list-connection")
+                .forEach(line => line.classList.remove("highlighted"));
 
         }
 
