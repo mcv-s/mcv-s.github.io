@@ -5,6 +5,8 @@ const gamesLink = document.querySelector("#gamesLink");
 const githubLink = document.querySelector("#githubLink");
 const postsLink = document.querySelector("#postsLink");
 const langsLink = document.querySelector("#langsLink");
+const skillsLink = document.querySelector("#skillsLink");
+
 
 
 
@@ -40,10 +42,12 @@ updateCounter();
 async function updateStats() {
 
     const statRequest = await fetch("stats.json");
+    const skillsRequest = await fetch("skills.json");
     const itchRequest = await fetch("itch_game_data.json");
     const repoRequest = await fetch("https://api.github.com/users/mcv-s");
 
     const stats = await statRequest.json();
+    const skills = await skillsRequest.json();
     const githubData = await repoRequest.json();
     const itchData = await itchRequest.json();
 
@@ -53,15 +57,20 @@ async function updateStats() {
     console.log(repos);
     console.log(itchData.games);
 
+
     var publishedGames = itchData.games.filter(game => game.published === true);
 
     console.log(publishedGames);
 
 
-
     langsLink.innerHTML = `Languages (${stats.languages})`
     gamesLink.innerHTML = `Games (${publishedGames.length})`
     githubLink.innerHTML = `Github (${repos})`
+    skillsLink.innerHTML = `Skills (${skills.length})`
+
+    githubLink.style.animation = "none";
+    githubLink.offsetHeight; // force reflow
+    githubLink.style.animation = "";
 
 
 
@@ -70,7 +79,21 @@ async function updateStats() {
 updateStats();
 
 
+document.querySelectorAll("[animatedText]").forEach(element => {
 
+    const observer = new MutationObserver(() => {
+        element.style.animation = "none";
+        element.offsetHeight;
+        element.style.animation = "";
+    });
+
+    observer.observe(element, {
+        childList: true,
+        characterData: true,
+        subtree: true
+    });
+
+});
 
 // ========================================
 // LOAD PROJECTS

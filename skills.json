@@ -1,0 +1,285 @@
+[
+    {
+        "name": "Windows",
+        "id": "WCU",
+        "shortDescription": "How to use windows",
+        "longDescription": "I like windows. It's probably the best OS for developing stuff.\n I use it effectively every day.\n Learning to use a computer allows you to learn all sorts of useful stuff!",
+        "image": "",
+        "date": "",
+        "icon": "desktop",
+        "websites": "",
+        "learnedPercentage": "95",
+        "connections": [
+            "MCU",
+            "programming"
+        ],
+        "otherData": [
+            "isStart"
+        ]
+    },
+    {
+        "name": "macOS",
+        "id": "MCU",
+        "shortDescription": "How to use a mac",
+        "longDescription": "I learned how to use Apple's dreadful computer system; not my favorite",
+        "image": "",
+        "date": "",
+        "icon": "apple-logo",
+        "websites": "",
+        "learnedPercentage": "75",
+        "connections": [
+            "WCU"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "Programming",
+        "id": "programming",
+        "shortDescription": "How to program",
+        "longDescription": "Hmm. . . I know the logic. But I don't know all the languages yet.",
+        "image": "",
+        "date": "",
+        "icon": "code",
+        "websites": "",
+        "learnedPercentage": "???",
+        "connections": [],
+        "otherData": []
+    },
+    {
+        "name": "Scratch",
+        "id": "scratch",
+        "shortDescription": "How to use scratch adequately",
+        "longDescription": "I know how to make games and all sorts of interesting stuff in scratch. I'm moving on from it to other languages.",
+        "image": "",
+        "date": "",
+        "icon": "code-block",
+        "websites": "[Scratch Profile](https://scratch.mit.edu/users/MarsChompsVenus/)",
+        "learnedPercentage": "97",
+        "connections": [
+            "programming"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "Microsoft MakeCode Arcade",
+        "id": "makecodeA",
+        "shortDescription": "Scratch, but worse",
+        "longDescription": "I used this BEFORE scratch. I liked it and it still feels nostalgic, but I don't have much to show for it because I don't know where my games went.",
+        "image": "",
+        "date": "",
+        "icon": "code-block",
+        "websites": "",
+        "learnedPercentage": "85",
+        "connections": [
+            "programming"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "Programming Languages",
+        "id": "languages",
+        "shortDescription": "Try to [learn] them all!",
+        "longDescription": "I am attempting to learn every practically useful programming language. See more about the ones I know [here.](/languages)",
+        "image": "",
+        "date": "",
+        "icon": "code",
+        "websites": "",
+        "learnedPercentage": "???",
+        "connections": [
+            "programming"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "Game Engines",
+        "id": "gameEngines",
+        "shortDescription": "The stuff that makes games",
+        "longDescription": "I wish I knew more of these",
+        "image": "",
+        "date": "",
+        "icon": "app-window",
+        "websites": "",
+        "learnedPercentage": "???",
+        "connections": [
+            "programming"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "GDevelop",
+        "id": "gdevelop",
+        "shortDescription": "First game engine",
+        "longDescription": "I like this game engine. It's a step up from scratch, but is an actual game engine, and not quite the same thing.",
+        "image": "",
+        "date": "2026-07-22",
+        "icon": "code-block",
+        "websites": "",
+        "learnedPercentage": "65",
+        "connections": [
+            "gameEngines"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "Unity",
+        "id": "unity",
+        "shortDescription": "Second real game engine?",
+        "longDescription": "I learned a bit of Unity with C# - but I don't really know that much yet. I want to learn more in the future once I know C# better.",
+        "image": "",
+        "date": "",
+        "icon": "cube",
+        "websites": "",
+        "learnedPercentage": "7",
+        "connections": [
+            "gameEngines"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "Game Design + Development",
+        "id": "gameDesign",
+        "shortDescription": "This one is different.",
+        "longDescription": "The process of designing games is a unique skill. I wish I knew how to do it better. You can see my games on [my itch page](https://marschompsvenus.itch.io/)",
+        "image": "",
+        "icon": "palette",
+        "websites": "",
+        "learnedPercentage": "40",
+        "connections": [
+            "programming",
+            "gameEngines",
+            "WCU"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "3D Modeling",
+        "id": "3dModeling",
+        "shortDescription": "Like 2D but better",
+        "longDescription": "Barely started over here but it sounds fun",
+        "image": "",
+        "icon": "cube-focus",
+        "websites": "",
+        "learnedPercentage": "???",
+        "connections": [
+            "WCU"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "Blender",
+        "id": "blender",
+        "shortDescription": "3D for game dev",
+        "longDescription": "This one IS 3D modeling, but it's more used for making game assets and animations then in the engineering world.",
+        "image": "",
+        "icon": "cube",
+        "websites": "",
+        "learnedPercentage": "15",
+        "connections": [
+            "3dModeling",
+            "gameDesign"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "Fusion 360",
+        "id": "fusion360",
+        "shortDescription": "For real-life design",
+        "longDescription": "Fusion360 is software which lets you make stuff. It's considered CAD.",
+        "image": "",
+        "icon": "cube",
+        "websites": "",
+        "learnedPercentage": "0",
+        "connections": [
+            "3dModeling"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "FreeCAD",
+        "id": "freecad",
+        "shortDescription": "A cad design program",
+        "longDescription": "I haven't started learning this one yet. But I want to.",
+        "image": "",
+        "icon": "cube",
+        "websites": "",
+        "learnedPercentage": "0",
+        "connections": [
+            "3dModeling"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "AutoCAD",
+        "id": "autocad",
+        "shortDescription": "Another thing",
+        "longDescription": "I need versatility. . . ",
+        "image": "",
+        "icon": "cube",
+        "websites": "",
+        "learnedPercentage": "0",
+        "connections": [
+            "3dModeling"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "AI",
+        "id": "ai",
+        "shortDescription": "Efficiency 101",
+        "longDescription": "Using AI is simple for me. I write a detailed description of what I want and eventually it becomes reality.\n\n I have an interesting relationship with it. I love it because it makes outcomes easily. But then . . . I want to know how to do it myself.",
+        "image": "",
+        "date": "",
+        "icon": "app-window",
+        "websites": "",
+        "learnedPercentage": "???",
+        "connections": [
+            "WCU"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "Graphic Design",
+        "id": "graphicDesign",
+        "shortDescription": "Useful stuff",
+        "longDescription": "Graphic design is another useful thing I like.",
+        "image": "",
+        "date": "",
+        "icon": "app-window",
+        "websites": "",
+        "learnedPercentage": "???",
+        "connections": [
+            "WCU"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "Affinity",
+        "id": "affinity",
+        "shortDescription": "Nice, free, software",
+        "longDescription": "[Affinity](https://www.affinity.studio/) is a nice app. It has lots of the features in paid software, at no charge, and is just a good experience!",
+        "image": "",
+        "date": "",
+        "icon": "paint-brush",
+        "websites": "",
+        "learnedPercentage": "60",
+        "connections": [
+            "graphicDesign"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "Canva",
+        "id": "canva",
+        "shortDescription": "More nice, free, software",
+        "longDescription": "I like canva as well. ",
+        "image": "",
+        "date": "",
+        "icon": "paint-brush",
+        "websites": "",
+        "learnedPercentage": "60",
+        "connections": [
+            "graphicDesign"
+        ],
+        "otherData": []
+    }
+]

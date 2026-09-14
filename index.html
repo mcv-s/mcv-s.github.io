@@ -81,25 +81,33 @@
 
                 <nav class="navigation">
 
-                    <a id="gamesLink" href="https://marschompsvenus.itch.io/">
+                    <a id="gamesLink" href="https://marschompsvenus.itch.io/" animatedText>
                         Games
                     </a>
 
                     |
 
-                    <a id="githubLink" href="https://github.com/mcv-s">
+                    <a id="githubLink" href="https://github.com/mcv-s" animatedText>
                         Github
-                    </a>
-                    
-                    | 
-                    
-                    <a id="langsLink" href="/languages">
-                        Languages
                     </a>
 
                     <br>
 
-                    <a href="/links.html">
+                    <a id="langsLink" href="/languages" animatedText>
+                        Languages
+                    </a>
+
+                    |
+
+                    <a id="skillsLink" href="/skills" data-tooltip="Maybe exaggerated?" animatedText>
+                        Skills
+                    </a>
+
+
+
+                    <br>
+
+                    <a href="/links.html" animatedText>
                         All my links + accounts
                     </a>
 
@@ -120,6 +128,26 @@
 
 
         <style>
+            [animatedText] {
+                animation: textChange 0.4s ease;
+            }
+
+            @keyframes textChange {
+                from {
+                    opacity: 0;
+                    filter: blur(5px);
+                    transform: translateY(3px);
+                }
+
+                to {
+                    opacity: 1;
+                    filter: blur(0);
+                    transform: translateY(0);
+                }
+            }
+
+
+
             .hero {
                 height: 100vh;
 
@@ -170,6 +198,14 @@
 
 
         <script>
+
+
+
+
+
+
+
+
             const scrollDown = document.querySelector(".scroll-down");
 
             // Show after 1 second if we're still at the top.

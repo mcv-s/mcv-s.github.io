@@ -1,0 +1,2666 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="favicon.png">
+
+    <title>Skills - MarsChompsVenus</title>
+
+    <link rel="stylesheet" href="page-design.css">
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+</head>
+
+
+<style>
+    /* =========================================================
+       PAGE
+    ========================================================= */
+
+    body {
+        overflow: hidden;
+    }
+
+
+    .skills-page {
+
+        width: 100vw;
+        height: 100vh;
+
+        margin: -20px;
+
+        position: relative;
+
+        overflow: hidden;
+
+    }
+
+
+    /* =========================================================
+       SUBTLE GRID
+    ========================================================= */
+
+    .graph-viewport {
+
+        position: absolute;
+
+        inset: 0;
+
+        overflow: hidden;
+
+        cursor: grab;
+
+        background-color: var(--background-color);
+
+    }
+
+    #info-button {
+        background: #6b6b6b00;
+        padding: 7px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all ease 0.15s;
+    }
+
+    #info-button:hover {
+        background: #6b6b6b3d;
+    }
+
+    .graph-grid {
+
+        position: absolute;
+
+        inset: -200%;
+
+        pointer-events: none;
+
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.05) 1px,
+                transparent 1px),
+            linear-gradient(90deg,
+                rgba(255, 255, 255, 0.05) 1px,
+                transparent 1px);
+
+        background-size: 50px 50px;
+
+        background-position: 0 0;
+
+        /*
+     * The grid will be transformed by JavaScript.
+     */
+
+        transform-origin: center center;
+
+    }
+
+
+    .graph-viewport.dragging {
+        cursor: grabbing;
+    }
+
+
+    /* =========================================================
+       TOP BAR
+    ========================================================= */
+
+    .top-bar {
+
+        position: absolute;
+
+        top: 15px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 100;
+
+        width: fit-content;
+
+        padding: 12px 20px;
+
+        border-radius: 15px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 15px;
+
+        white-space: nowrap;
+
+    }
+
+
+    .top-bar a {
+        font-size: 14px;
+    }
+
+
+    .top-title {
+
+        color: var(--heading-color);
+
+        font-size: 18px;
+
+        margin: 0;
+
+    }
+
+
+    /* =========================================================
+       GRAPH PLANE
+    ========================================================= */
+
+    .graph-plane {
+
+        position: absolute;
+
+        left: 0;
+        top: 0;
+
+        width: 1px;
+        height: 1px;
+
+        transform-origin: 0 0;
+
+    }
+
+
+    /* =========================================================
+       CONNECTIONS
+    ========================================================= */
+
+    .connections {
+
+        position: absolute;
+
+        left: 0;
+        top: 0;
+
+        width: 1px;
+        height: 1px;
+
+        overflow: visible;
+
+        pointer-events: none;
+
+    }
+
+
+    .connection {
+
+        stroke: rgba(170, 77, 4, 0.48);
+
+        stroke-width: 1.5;
+
+        fill: none;
+
+        vector-effect: non-scaling-stroke;
+
+        transition:
+            stroke 0.2s ease,
+            stroke-width 0.2s ease;
+
+    }
+
+
+    .connection.highlighted {
+
+        stroke: var(--accent-color);
+
+        stroke-width: 2.5;
+
+    }
+
+
+    /* =========================================================
+       NODES
+    ========================================================= */
+
+    .skill-node {
+
+        position: absolute;
+
+        width: 180px;
+
+        padding: 18px;
+
+        box-sizing: border-box;
+
+        transform: translate(-50%, -50%);
+
+        border-radius: 18px;
+
+        user-select: none;
+
+        cursor: pointer;
+
+        text-align: center;
+
+        z-index: 5;
+
+        transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease,
+            opacity 0.25s ease,
+            transform 0.2s ease;
+
+
+        backdrop-filter: blur(5px) !important;
+        -webkit-backdrop-filter: blur(0px);
+
+        border: 1.5px solid rgb(124, 124, 124, 0.5);
+
+    }
+
+
+    .skill-node:hover {
+
+
+        box-shadow:
+            0 8px 30px rgba(0, 0, 0, 0.28);
+
+        transform:
+            translate(-50%, -50%) scale(1.025);
+
+    }
+
+
+    .skill-node.start-node {
+
+        border-color:
+            rgba(170, 77, 4, 0.4);
+
+        box-shadow:
+            0 0 25px rgba(170, 77, 4, 0.1);
+
+    }
+
+
+    .skill-node.selected {
+
+        border-color:
+            rgba(170, 77, 4, 0.75);
+
+        box-shadow:
+            0 0 35px rgba(170, 77, 4, 0.16);
+
+    }
+
+
+    .skill-node.dimmed {
+
+        opacity: 0.22;
+
+    }
+
+
+    .node-icon {
+
+        font-size: 25px;
+
+        color: var(--accent-color);
+
+        margin-bottom: 8px;
+
+    }
+
+
+    .node-name {
+
+        margin: 0 0 8px;
+
+        font-size: 15px;
+
+        line-height: 1.3;
+
+        color: var(--heading-color);
+
+    }
+
+
+    .node-description {
+
+        margin: 0;
+
+        color: #8b948b;
+
+        font-size: 10px;
+
+        line-height: 1.5;
+
+    }
+
+
+    .node-percentage {
+
+        margin-top: 12px;
+
+        height: 4px;
+
+        background: #292929;
+
+        border-radius: 10px;
+
+        overflow: hidden;
+
+    }
+
+
+    .node-percentage-fill {
+
+        height: 100%;
+
+        background: var(--accent-color);
+
+        border-radius: inherit;
+
+    }
+
+
+    .node-percentage-text {
+
+        margin-top: 5px;
+
+        color: #5B665B;
+
+        font-size: 9px;
+
+    }
+
+
+    .start-label {
+
+        margin-top: 9px;
+
+        color: var(--accent-color);
+
+        font-size: 8px;
+
+        text-transform: uppercase;
+
+    }
+
+
+    /* =========================================================
+       DETAILS PANEL
+    ========================================================= */
+
+    .details-panel {
+
+        position: absolute;
+
+        right: 20px;
+        top: 70px;
+
+        width: 300px;
+
+        max-height:
+            calc(100vh - 100px);
+
+        box-sizing: border-box;
+
+        padding: 22px;
+
+        border-radius: 20px;
+
+        z-index: 100;
+
+        overflow-y: auto;
+
+        opacity: 0;
+
+        pointer-events: none;
+
+        transform: translateX(20px);
+
+        transition:
+            opacity 0.2s ease,
+            transform 0.2s ease;
+
+    }
+
+
+    .details-panel.visible {
+
+        opacity: 1;
+
+        pointer-events: auto;
+
+        transform: translateX(0);
+
+    }
+
+
+    .details-close {
+
+        position: absolute;
+
+        top: 15px;
+        right: 15px;
+
+        width: 30px;
+        height: 30px;
+
+        border: none;
+
+        background: transparent;
+
+        color: #777;
+
+        font-size: 20px;
+
+        cursor: pointer;
+
+    }
+
+
+    .details-close:hover {
+        color: var(--heading-color);
+    }
+
+
+    .details-image {
+
+        width: 100%;
+
+        max-height: 160px;
+
+        object-fit: cover;
+
+        border-radius: 12px;
+
+        margin-bottom: 15px;
+
+    }
+
+
+    .details-title {
+
+        margin:
+            0 35px 5px 0;
+
+        font-size: 21px;
+
+    }
+
+
+    .details-id {
+
+        color: #5B665B;
+
+        font-size: 10px;
+
+    }
+
+
+    .details-description {
+
+        margin-top: 20px;
+
+        color: #aaa;
+
+        font-family: Arial, sans-serif;
+
+        letter-spacing: normal;
+
+        line-height: 1.5;
+
+        white-space: pre-line;
+
+    }
+
+
+    .details-description p {
+        margin-top: 0;
+    }
+
+
+    .details-description a {
+
+        color: var(--accent-color);
+
+    }
+
+
+    .details-date {
+
+        color: #777;
+
+        font-size: 11px;
+
+        margin-top: 15px;
+
+    }
+
+
+    .details-progress {
+        margin-top: 15px;
+    }
+
+
+    .details-progress-label {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        color: #777;
+
+        font-size: 10px;
+
+        margin-bottom: 5px;
+
+    }
+
+
+    .details-progress-bar {
+
+        height: 6px;
+
+        background: #292929;
+
+        border-radius: 10px;
+
+        overflow: hidden;
+
+    }
+
+
+    .details-progress-fill {
+
+        height: 100%;
+
+        background: var(--accent-color);
+
+    }
+
+
+    .details-websites {
+
+        margin-top: 18px;
+
+        padding-top: 15px;
+
+        border-top:
+            1px solid rgba(255, 255, 255, 0.05);
+
+        font-family: Arial, sans-serif;
+
+        letter-spacing: normal;
+
+        font-size: 12px;
+
+        line-height: 1.6;
+
+    }
+
+
+    .details-websites a {
+        color: var(--accent-color);
+    }
+
+
+    /* =========================================================
+       CONTROLS
+    ========================================================= */
+
+    .controls {
+
+        position: absolute;
+
+        bottom: 20px;
+        left: 20px;
+
+        z-index: 100;
+
+        display: flex;
+
+        gap: 5px;
+
+    }
+
+
+    .control-button {
+
+        width: 38px;
+        height: 38px;
+
+        border:
+            1px solid rgba(255, 255, 255, 0.05);
+
+        border-radius: 12px;
+
+        background:
+            rgba(22, 22, 22, 0.7);
+
+        color: #888;
+
+        backdrop-filter: blur(8px);
+
+        cursor: pointer;
+
+        font-size: 18px;
+
+    }
+
+
+    .control-button:hover {
+
+        color: var(--heading-color);
+
+        border-color:
+            rgba(255, 255, 255, 0.12);
+
+    }
+
+
+    /* =========================================================
+       STATUS
+    ========================================================= */
+
+    .status {
+
+        position: absolute;
+
+        left: 50%;
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+        color: #5B665B;
+
+        font-size: 13px;
+
+        z-index: 20;
+
+    }
+</style>
+
+
+<body>
+
+
+    <div class="skills-page">
+
+
+        <!-- =====================================================
+         TOP BAR
+    ===================================================== -->
+
+        <div static-blur-panel class="top-bar">
+
+
+            <a href="/">
+                Home
+            </a>
+
+
+            |
+            <h1 class="top-title">
+                My Skills
+
+
+
+            </h1>
+
+            |
+
+            <i class="ph ph-info" id="info-button" data-tooltip="Info"></i>
+
+
+
+
+        </div>
+
+
+
+        <!-- =====================================================
+         GRAPH
+    ===================================================== -->
+
+        <div class="graph-viewport" id="graphViewport">
+
+            <div class="graph-grid" id="graphGrid"></div>
+
+            <div class="graph-plane" id="graphPlane">
+
+                <svg class="connections" id="connections"></svg>
+
+                <div id="nodes"></div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+         STATUS
+    ===================================================== -->
+
+        <div class="status" id="status">
+            Loading skills...
+        </div>
+
+
+
+        <!-- =====================================================
+         DETAILS
+    ===================================================== -->
+
+        <div static-blur-panel class="details-panel" id="detailsPanel">
+
+            <button class="details-close" id="detailsClose">
+                <i class="ph ph-x"></i>
+            </button>
+
+            <br>
+
+
+            <img class="details-image" id="detailsImage" src="" alt="">
+
+
+            <h2 class="details-title" id="detailsTitle"></h2>
+
+
+            <div class="details-id" id="detailsId"></div>
+
+
+            <div class="details-websites" id="detailsWebsites"></div>
+
+
+            <div class="details-description" id="detailsDescription"></div>
+
+
+            <div class="details-date" id="detailsDate"></div>
+
+
+            <div class="details-progress" id="detailsProgress">
+
+                <div class="details-progress-label">
+
+                    <span>
+                        Learned
+                    </span>
+
+                    <span id="detailsPercentage">
+                        0%
+                    </span>
+
+                </div>
+
+
+                <div class="details-progress-bar">
+
+                    <div class="details-progress-fill" id="detailsProgressFill"></div>
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+        <!-- =====================================================
+         CONTROLS
+    ===================================================== -->
+
+        <div class="controls">
+
+            <button class="control-button" id="zoomOut" title="Zoom out">
+                <i class="ph ph-minus"></i>
+            </button>
+
+
+            <button class="control-button" id="resetView" title="Reset view">
+                <i class="ph ph-arrows-clockwise"></i>
+            </button>
+
+
+            <button class="control-button" id="zoomIn" title="Zoom in">
+                <i class="ph ph-plus"></i>
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+
+        /* =========================================================
+           REFERENCES
+        ========================================================= */
+
+        const graphViewport =
+            document.querySelector("#graphViewport");
+
+        const graphPlane =
+            document.querySelector("#graphPlane");
+
+        const graphGrid =
+            document.querySelector("#graphGrid");
+
+        const nodesContainer =
+            document.querySelector("#nodes");
+
+        const connectionsSvg =
+            document.querySelector("#connections");
+
+        const status =
+            document.querySelector("#status");
+
+
+        const detailsPanel =
+            document.querySelector("#detailsPanel");
+
+        const detailsClose =
+            document.querySelector("#detailsClose");
+
+
+        const detailsImage =
+            document.querySelector("#detailsImage");
+
+        const detailsTitle =
+            document.querySelector("#detailsTitle");
+
+        const detailsId =
+            document.querySelector("#detailsId");
+
+        const detailsDescription =
+            document.querySelector("#detailsDescription");
+
+        const detailsDate =
+            document.querySelector("#detailsDate");
+
+        const detailsPercentage =
+            document.querySelector("#detailsPercentage");
+
+
+
+        const detailsProgressFill =
+            document.querySelector("#detailsProgressFill");
+
+        const detailsWebsites =
+            document.querySelector("#detailsWebsites");
+
+
+
+        const detailObject = document.querySelector("#detailsProgress");
+
+
+        const infoButton =
+            document.querySelector("#info-button");
+
+
+        infoButton.addEventListener("click", () => {
+            showInfo()
+        });
+
+
+
+
+        function showInfo() {
+
+            detailsPanel.classList.add(
+                "visible"
+            );
+
+
+            detailsTitle.textContent =
+                "MarsChompsVenus' Skills"
+
+
+            detailsId.textContent =
+                ""
+
+
+            detailsDescription.innerHTML =
+                marked.parse(
+                    "I seem to have a lot of skills. . . I guess these are tools I've learned to use, things I've learned to do, and everything in between. \n\n I like to try and learn new stuff. \n I'm sort of a \"Jack of all trades but master of none\" when it comes to technology. \n\n I like to learn enough of something to be able to use it. If I learned more than that I wouldn't have time to know all of it."
+                );
+
+            detailObject.hidden = true;
+
+
+
+        }
+
+
+
+
+
+        /* =========================================================
+           DATA
+        ========================================================= */
+
+        let skills = [];
+
+        const skillMap = new Map();
+
+
+        const GRID_PARALLAX = 0.75;
+
+
+
+        /* =========================================================
+           GRAPH STATE
+        ========================================================= */
+
+        let nodePositions = {};
+
+        let scale = 1;
+
+        let offsetX = 0;
+        let offsetY = 0;
+
+
+        let isPanning = false;
+
+        let panStartX = 0;
+        let panStartY = 0;
+
+        let panOriginX = 0;
+        let panOriginY = 0;
+
+
+
+        /* =========================================================
+           LOAD DATA
+        ========================================================= */
+
+        async function loadSkills() {
+
+            try {
+
+                const response =
+                    await fetch("skills.json");
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        `HTTP ${response.status}`
+                    );
+
+                }
+
+
+                skills =
+                    await response.json();
+
+
+                skills.forEach(skill => {
+
+                    skillMap.set(
+                        skill.id,
+                        skill
+                    );
+
+                });
+
+
+                status.style.display = "none";
+
+
+                createLayout();
+
+                renderNodes();
+
+                renderConnections();
+
+                resetView();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                status.textContent =
+                    "Could not load skills.json.";
+
+            }
+
+        }
+
+
+
+        /* =========================================================
+           FIND START NODE
+        ========================================================= */
+
+        function getStartNode() {
+
+            return skills.find(skill =>
+
+                Array.isArray(skill.otherData) &&
+                skill.otherData.includes("isStart")
+
+            );
+
+        }
+
+
+
+        /* =========================================================
+           BUILD LAYERS
+        ========================================================= */
+
+
+        function createLayout() {
+
+            nodePositions = {};
+
+
+            const startNode =
+                getStartNode();
+
+
+            if (!startNode) {
+
+                console.warn(
+                    "No isStart node found."
+                );
+
+                return;
+
+            }
+
+
+            /* =========================================================
+               BUILD UNDIRECTED GRAPH
+        
+               A connection between A and B means:
+        
+                   A <-> B
+        
+               regardless of which node actually lists the
+               other in its connections array.
+            ========================================================= */
+
+            const adjacency = new Map();
+
+
+            skills.forEach(skill => {
+
+                adjacency.set(
+                    skill.id,
+                    new Set()
+                );
+
+            });
+
+
+            skills.forEach(skill => {
+
+                if (!Array.isArray(skill.connections)) {
+                    return;
+                }
+
+
+                skill.connections.forEach(
+                    connectedId => {
+
+                        if (!adjacency.has(connectedId)) {
+                            return;
+                        }
+
+
+                        adjacency
+                            .get(skill.id)
+                            .add(connectedId);
+
+
+                        adjacency
+                            .get(connectedId)
+                            .add(skill.id);
+
+                    }
+                );
+
+            });
+
+
+
+            /* =========================================================
+               CALCULATE DISTANCE FROM START
+        
+               START = 0
+               direct connection = 1
+               connection from that = 2
+               etc.
+        
+               Because this uses the undirected graph, the levels
+               now represent actual graph distance.
+            ========================================================= */
+
+            const distances = new Map();
+
+            const queue = [startNode.id];
+
+
+            distances.set(
+                startNode.id,
+                0
+            );
+
+
+            while (queue.length > 0) {
+
+                const currentId =
+                    queue.shift();
+
+
+                const currentDistance =
+                    distances.get(currentId);
+
+
+                const neighbors =
+                    adjacency.get(currentId);
+
+
+                if (!neighbors) {
+                    continue;
+                }
+
+
+                neighbors.forEach(
+                    neighborId => {
+
+                        if (distances.has(neighborId)) {
+                            return;
+                        }
+
+
+                        distances.set(
+                            neighborId,
+                            currentDistance + 1
+                        );
+
+
+                        queue.push(
+                            neighborId
+                        );
+
+                    }
+                );
+
+            }
+
+
+
+            /* =========================================================
+               CREATE LEVELS
+            ========================================================= */
+
+            const layers = [];
+
+
+            distances.forEach(
+                (distance, id) => {
+
+                    if (!layers[distance]) {
+                        layers[distance] = [];
+                    }
+
+
+                    layers[distance].push(id);
+
+                }
+            );
+
+
+
+            /*
+             * Anything disconnected from the start goes at the
+             * very top.
+             */
+
+            const disconnected =
+                skills.filter(
+                    skill =>
+                        !distances.has(skill.id)
+                );
+
+
+            if (disconnected.length > 0) {
+
+                layers[layers.length] = [];
+
+
+                disconnected.forEach(
+                    skill => {
+
+                        layers[layers.length - 1].push(
+                            skill.id
+                        );
+
+                    }
+                );
+
+            }
+
+
+
+            /* =========================================================
+               ORDER EACH LEVEL
+        
+               Instead of randomizing everything, try to put nodes
+               near the nodes they connect to on the levels above
+               and below.
+        
+               This dramatically reduces long, awkward connections.
+            ========================================================= */
+
+            for (
+                let iteration = 0;
+                iteration < 4;
+                iteration++
+            ) {
+
+                for (
+                    let layerIndex = 1;
+                    layerIndex < layers.length;
+                    layerIndex++
+                ) {
+
+                    const layer =
+                        layers[layerIndex];
+
+
+                    if (!layer) {
+                        continue;
+                    }
+
+
+                    layer.sort(
+                        (aId, bId) => {
+
+                            const aNeighbors =
+                                [...adjacency.get(aId)]
+                                    .filter(
+                                        id =>
+                                            distances.get(id) ===
+                                            layerIndex - 1
+                                    );
+
+
+                            const bNeighbors =
+                                [...adjacency.get(bId)]
+                                    .filter(
+                                        id =>
+                                            distances.get(id) ===
+                                            layerIndex - 1
+                                    );
+
+
+                            const getAverage =
+                                neighbors => {
+
+                                    if (
+                                        neighbors.length === 0
+                                    ) {
+                                        return 0;
+                                    }
+
+
+                                    return neighbors.reduce(
+                                        (sum, id) => {
+
+                                            const index =
+                                                layers[
+                                                    layerIndex - 1
+                                                ].indexOf(id);
+
+
+                                            return sum + index;
+
+                                        },
+                                        0
+                                    ) / neighbors.length;
+
+                                };
+
+
+                            return (
+                                getAverage(aNeighbors) -
+                                getAverage(bNeighbors)
+                            );
+
+                        }
+                    );
+
+                }
+
+            }
+
+
+
+            /* =========================================================
+               POSITION LEVELS
+            ========================================================= */
+
+            const verticalSpacing = 430;
+
+            const horizontalSpacing = 510;
+
+
+            layers.forEach(
+                (layer, layerIndex) => {
+
+                    if (!layer) {
+                        return;
+                    }
+
+
+                    /*
+                     * Start node is centered at the bottom.
+                     */
+
+                    if (layerIndex === 0) {
+
+                        layer.forEach(
+                            id => {
+
+                                nodePositions[id] = {
+                                    x: 0,
+                                    y: 0
+                                };
+
+                            }
+                        );
+
+
+                        return;
+
+                    }
+
+
+                    const count =
+                        layer.length;
+
+
+                    const totalWidth =
+                        (count - 1) *
+                        horizontalSpacing;
+
+
+                    layer.forEach(
+                        (id, index) => {
+
+                            let x =
+                                index *
+                                horizontalSpacing -
+                                totalWidth / 2;
+
+
+                            /*
+                             * Add some organic movement, but
+                             * don't let it completely destroy
+                             * the relationship between layers.
+                             */
+
+                            x +=
+                                (Math.random() - 0.5) *
+                                180;
+
+
+                            let y =
+                                -layerIndex *
+                                verticalSpacing;
+
+                            y +=
+                                (Math.random() - 0.5) *
+                                180;
+
+
+
+                            nodePositions[id] = {
+                                x,
+                                y
+                            };
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+            /* =========================================================
+               PULL NODES TOWARD THEIR CONNECTIONS
+        
+               This is the important part.
+        
+               Nodes are gently pulled toward the average X
+               position of their connected nodes on adjacent
+               levels.
+        
+               This keeps connections visually coherent without
+               turning the graph into a rigid tree.
+            ========================================================= */
+
+            for (
+                let iteration = 0;
+                iteration < 8;
+                iteration++
+            ) {
+
+                for (
+                    let layerIndex = 1;
+                    layerIndex < layers.length;
+                    layerIndex++
+                ) {
+
+                    const layer =
+                        layers[layerIndex];
+
+
+                    if (!layer) {
+                        continue;
+                    }
+
+
+                    layer.forEach(
+                        id => {
+
+                            const position =
+                                nodePositions[id];
+
+
+                            if (!position) {
+                                return;
+                            }
+
+
+                            const neighbors =
+                                [...adjacency.get(id)]
+                                    .filter(
+                                        neighborId => {
+
+                                            const neighborDistance =
+                                                distances.get(
+                                                    neighborId
+                                                );
+
+
+                                            return (
+                                                neighborDistance ===
+                                                layerIndex - 1 ||
+                                                neighborDistance ===
+                                                layerIndex + 1
+                                            );
+
+                                        }
+                                    );
+
+
+                            if (
+                                neighbors.length === 0
+                            ) {
+                                return;
+                            }
+
+
+                            let totalX = 0;
+
+                            let count = 0;
+
+
+                            neighbors.forEach(
+                                neighborId => {
+
+                                    const neighbor =
+                                        nodePositions[
+                                        neighborId
+                                        ];
+
+
+                                    if (!neighbor) {
+                                        return;
+                                    }
+
+
+                                    totalX +=
+                                        neighbor.x;
+
+
+                                    count++;
+
+                                }
+                            );
+
+
+                            if (count === 0) {
+                                return;
+                            }
+
+
+                            const targetX =
+                                totalX / count;
+
+
+                            /*
+                             * Only move partway toward the
+                             * connection center each iteration.
+                             */
+
+                            position.x +=
+                                (
+                                    targetX -
+                                    position.x
+                                ) *
+                                0.18;
+
+                        }
+                    );
+
+
+                    /*
+                     * Re-establish minimum horizontal spacing
+                     * after pulling nodes together.
+                     */
+
+                    layer.sort(
+                        (a, b) =>
+                            nodePositions[a].x -
+                            nodePositions[b].x
+                    );
+
+
+                    for (
+                        let i = 1;
+                        i < layer.length;
+                        i++
+                    ) {
+
+                        const previous =
+                            nodePositions[
+                            layer[i - 1]
+                            ];
+
+
+                        const current =
+                            nodePositions[
+                            layer[i]
+                            ];
+
+
+                        const difference =
+                            current.x -
+                            previous.x;
+
+
+                        if (
+                            difference <
+                            horizontalSpacing
+                        ) {
+
+                            const adjustment =
+                                (
+                                    horizontalSpacing -
+                                    difference
+                                ) / 2;
+
+
+                            previous.x -=
+                                adjustment;
+
+
+                            current.x +=
+                                adjustment;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+
+
+            /*
+             * Final collision pass.
+             */
+
+            separateOverlappingNodes();
+
+        }
+
+        /* =========================================================
+           SEPARATE OVERLAPPING NODES
+        ========================================================= */
+        function separateOverlappingNodes() {
+
+            const minimumDistanceX = 190;
+
+            const minimumDistanceY = 150;
+
+
+            for (let iteration = 0; iteration < 6; iteration++) {
+
+                skills.forEach((skill, index) => {
+
+                    const a =
+                        nodePositions[skill.id];
+
+
+                    if (!a) {
+                        return;
+                    }
+
+
+                    skills.forEach(
+                        (otherSkill, otherIndex) => {
+
+                            if (index >= otherIndex) {
+                                return;
+                            }
+
+
+                            const b =
+                                nodePositions[
+                                otherSkill.id
+                                ];
+
+
+                            if (!b) {
+                                return;
+                            }
+
+
+                            const dx =
+                                b.x - a.x;
+
+                            const dy =
+                                b.y - a.y;
+
+
+                            /*
+                             * Only separate nodes that are
+                             * actually on the same general level.
+                             */
+
+                            if (
+                                Math.abs(dy) <
+                                minimumDistanceY &&
+                                Math.abs(dx) <
+                                minimumDistanceX
+                            ) {
+
+                                const direction =
+                                    dx >= 0
+                                        ? 1
+                                        : -1;
+
+
+                                const amount =
+                                    (
+                                        minimumDistanceX -
+                                        Math.abs(dx)
+                                    ) / 2;
+
+
+                                a.x -=
+                                    direction *
+                                    amount;
+
+
+                                b.x +=
+                                    direction *
+                                    amount;
+
+                            }
+
+                        }
+                    );
+
+                });
+
+            }
+
+        }
+        /* =========================================================
+           RENDER NODES
+        ========================================================= */
+
+        function renderNodes() {
+
+            nodesContainer.innerHTML = "";
+
+
+            skills.forEach(skill => {
+
+                const element =
+                    document.createElement("div");
+
+
+                element.className =
+                    "skill-node";
+
+
+                if (
+                    Array.isArray(skill.otherData) &&
+                    skill.otherData.includes("isStart")
+                ) {
+
+                    element.classList.add(
+                        "start-node"
+                    );
+
+                }
+
+
+                element.dataset.id =
+                    skill.id;
+
+
+                const percentage =
+                    Math.max(
+                        0,
+                        Math.min(
+                            100,
+                            Number(
+                                skill.learnedPercentage
+                            )
+                        )
+
+                    ) || skill.learnedPercentage;
+
+                let percentageBarObject = `
+                <div class="node-percentage">
+
+                    <div
+                        class="node-percentage-fill"
+                        style="width: ${percentage}%"
+                    ></div>
+
+                </div>
+
+
+                <div class="node-percentage-text">
+                    ${percentage}% learned
+                </div>
+
+                ${Array.isArray(skill.otherData) &&
+                        skill.otherData.includes("isStart")
+                        ? `
+                            <div class="start-label">
+                                Starting point
+                            </div>
+                        `
+                        : ""
+                    }`;
+
+
+
+                if (skill.learnedPercentage === "???") {
+                    percentageBarObject = "";
+                }
+
+
+
+                /*
+                 * "desktop" becomes
+                 * ph-desktop.
+                 *
+                 * "x" becomes
+                 * ph-x.
+                 */
+
+                const icon =
+                    skill.icon || "brain";
+
+
+
+
+
+                element.innerHTML = `
+
+                <div class="node-icon">
+
+                    <i class="ph ph-${escapeHtml(icon)}"></i>
+
+                </div>
+
+
+                <h3 class="node-name">
+                    ${escapeHtml(skill.name)}
+                </h3>
+
+
+                <p class="node-description">
+                    ${escapeHtml(skill.shortDescription)}
+                </p>
+
+
+                ${percentageBarObject}
+
+
+
+
+
+            `;
+
+
+                nodesContainer.appendChild(
+                    element
+                );
+
+
+                updateNodePosition(
+                    element,
+                    skill.id
+                );
+
+
+                /*
+                 * Nodes are clickable.
+                 * They are NOT draggable.
+                 */
+
+                element.addEventListener(
+                    "click",
+                    event => {
+
+                        event.stopPropagation();
+
+                        showDetails(skill);
+
+                    }
+                );
+
+            });
+
+        }
+
+
+
+        /* =========================================================
+           UPDATE NODE POSITION
+        ========================================================= */
+
+        function updateNodePosition(
+            element,
+            id
+        ) {
+
+            const position =
+                nodePositions[id];
+
+
+            if (!position) {
+                return;
+            }
+
+
+            element.style.left =
+                `${position.x}px`;
+
+            element.style.top =
+                `${position.y}px`;
+
+        }
+
+
+
+        /* =========================================================
+           CONNECTIONS
+        ========================================================= */
+
+        function renderConnections() {
+
+            connectionsSvg.innerHTML = "";
+
+
+            const drawnConnections =
+                new Set();
+
+
+            skills.forEach(skill => {
+
+                const from =
+                    nodePositions[skill.id];
+
+
+                if (!from) {
+                    return;
+                }
+
+
+                skill.connections.forEach(
+                    connectionId => {
+
+                        const to =
+                            nodePositions[
+                            connectionId
+                            ];
+
+
+                        if (!to) {
+                            return;
+                        }
+
+
+                        /*
+                         * Treat A -> B and B -> A
+                         * as the same visual connection.
+                         */
+
+                        const connectionKey =
+                            [
+                                skill.id,
+                                connectionId
+                            ]
+                                .sort()
+                                .join("-");
+
+
+                        if (
+                            drawnConnections.has(
+                                connectionKey
+                            )
+                        ) {
+                            return;
+                        }
+
+
+                        drawnConnections.add(
+                            connectionKey
+                        );
+
+
+                        const line =
+                            document.createElementNS(
+                                "http://www.w3.org/2000/svg",
+                                "line"
+                            );
+
+
+                        line.classList.add(
+                            "connection"
+                        );
+
+
+                        line.dataset.from =
+                            skill.id;
+
+                        line.dataset.to =
+                            connectionId;
+
+
+                        line.setAttribute(
+                            "x1",
+                            from.x
+                        );
+
+                        line.setAttribute(
+                            "y1",
+                            from.y
+                        );
+
+                        line.setAttribute(
+                            "x2",
+                            to.x
+                        );
+
+                        line.setAttribute(
+                            "y2",
+                            to.y
+                        );
+
+
+                        connectionsSvg.appendChild(
+                            line
+                        );
+
+                    }
+                );
+
+            });
+
+        }
+
+
+
+        /* =========================================================
+           UPDATE CONNECTIONS
+        ========================================================= */
+
+        function updateConnections() {
+
+            const lines =
+                connectionsSvg.querySelectorAll(
+                    ".connection"
+                );
+
+
+            lines.forEach(line => {
+
+                const from =
+                    nodePositions[
+                    line.dataset.from
+                    ];
+
+
+                const to =
+                    nodePositions[
+                    line.dataset.to
+                    ];
+
+
+                if (!from || !to) {
+                    return;
+                }
+
+
+                line.setAttribute(
+                    "x1",
+                    from.x
+                );
+
+                line.setAttribute(
+                    "y1",
+                    from.y
+                );
+
+                line.setAttribute(
+                    "x2",
+                    to.x
+                );
+
+                line.setAttribute(
+                    "y2",
+                    to.y
+                );
+
+            });
+
+        }
+
+
+
+        /* =========================================================
+           PAN GRAPH
+        ========================================================= */
+
+        graphViewport.addEventListener(
+            "pointerdown",
+            event => {
+
+                /*
+                 * Don't pan when clicking a node.
+                 */
+
+                if (
+                    event.target.closest(
+                        ".skill-node"
+                    )
+                ) {
+                    return;
+                }
+
+
+                isPanning = true;
+
+
+                graphViewport.classList.add(
+                    "dragging"
+                );
+
+
+                panStartX =
+                    event.clientX;
+
+                panStartY =
+                    event.clientY;
+
+
+                panOriginX =
+                    offsetX;
+
+                panOriginY =
+                    offsetY;
+
+
+                graphViewport.setPointerCapture(
+                    event.pointerId
+                );
+
+            }
+        );
+
+
+        graphViewport.addEventListener(
+            "pointermove",
+            event => {
+
+                if (!isPanning) {
+                    return;
+                }
+
+
+                offsetX =
+                    panOriginX +
+                    event.clientX -
+                    panStartX;
+
+
+                offsetY =
+                    panOriginY +
+                    event.clientY -
+                    panStartY;
+
+
+                updatePlaneTransform();
+
+            }
+        );
+
+
+        graphViewport.addEventListener(
+            "pointerup",
+            () => {
+
+                isPanning = false;
+
+
+                graphViewport.classList.remove(
+                    "dragging"
+                );
+
+            }
+        );
+
+
+
+        /* =========================================================
+           ZOOM
+        ========================================================= */
+
+        graphViewport.addEventListener(
+            "wheel",
+            event => {
+
+                event.preventDefault();
+
+
+                const oldScale =
+                    scale;
+
+
+                const zoomAmount =
+                    event.deltaY > 0
+                        ? 0.9
+                        : 1.1;
+
+
+                scale =
+                    Math.max(
+                        0.25,
+                        Math.min(
+                            2.5,
+                            scale * zoomAmount
+                        )
+                    );
+
+
+                /*
+                 * Zoom around the mouse.
+                 */
+
+                const rect =
+                    graphViewport.getBoundingClientRect();
+
+
+                const mouseX =
+                    event.clientX -
+                    rect.left;
+
+
+                const mouseY =
+                    event.clientY -
+                    rect.top;
+
+
+                offsetX =
+                    mouseX -
+                    (
+                        mouseX -
+                        offsetX
+                    ) *
+                    (scale / oldScale);
+
+
+                offsetY =
+                    mouseY -
+                    (
+                        mouseY -
+                        offsetY
+                    ) *
+                    (scale / oldScale);
+
+
+                updatePlaneTransform();
+
+            },
+            {
+                passive: false
+            }
+        );
+
+
+
+        /* =========================================================
+           PLANE TRANSFORM
+        ========================================================= */
+
+        function updatePlaneTransform() {
+
+            /*
+             * Main graph.
+             *
+             * Nodes and connections get the full
+             * pan + zoom transformation.
+             */
+
+            graphPlane.style.transform =
+                `translate(
+            calc(50% + ${offsetX}px),
+            calc(50% + ${offsetY}px)
+        )
+        scale(${scale})`;
+
+
+            /*
+             * Grid.
+             *
+             * It receives the same zoom,
+             * but only a fraction of the pan.
+             */
+
+            const gridOffsetX =
+                offsetX * GRID_PARALLAX;
+
+            const gridOffsetY =
+                offsetY * GRID_PARALLAX;
+
+
+            graphGrid.style.transform =
+                `translate(
+            ${gridOffsetX}px,
+            ${gridOffsetY}px
+        )
+        scale(${scale})`;
+
+        }
+
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        function resetView() {
+
+            scale = 0.5;
+
+            offsetX = window.innerWidth / 2;
+            offsetY = window.innerHeight / 1.15;
+
+
+            updatePlaneTransform();
+
+        }
+
+
+
+        /* =========================================================
+           ZOOM BUTTONS
+        ========================================================= */
+
+        document
+            .querySelector("#zoomIn")
+            .addEventListener(
+                "click",
+                () => {
+
+                    scale =
+                        Math.min(
+                            2.5,
+                            scale * 1.15
+                        );
+
+                    updatePlaneTransform();
+
+                }
+            );
+
+
+        document
+            .querySelector("#zoomOut")
+            .addEventListener(
+                "click",
+                () => {
+
+                    scale =
+                        Math.max(
+                            0.25,
+                            scale / 1.15
+                        );
+
+                    updatePlaneTransform();
+
+                }
+            );
+
+
+        document
+            .querySelector("#resetView")
+            .addEventListener(
+                "click",
+                resetView
+            );
+
+
+
+        /* =========================================================
+           NODE DETAILS
+        ========================================================= */
+
+        function showDetails(skill) {
+
+            detailObject.hidden = false;
+
+            detailsPanel.classList.add(
+                "visible"
+            );
+
+
+            detailsTitle.textContent =
+                skill.name;
+
+
+            detailsId.textContent =
+                skill.id;
+
+
+            detailsDescription.innerHTML =
+                marked.parse(
+                    skill.longDescription || ""
+                );
+
+
+            detailsDate.textContent =
+                skill.date
+                    ? `Learned on ${skill.date}`
+                    : "";
+
+
+            const percentage =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        Number(
+                            skill.learnedPercentage
+                        ) || 0
+                    )
+                );
+
+            if (skill.learnedPercentage === "???") {
+                detailObject.hidden = true;
+            }
+
+
+            detailsPercentage.textContent =
+                `${percentage}%`;
+
+
+            detailsProgressFill.style.width =
+                `${percentage}%`;
+
+
+            detailsWebsites.innerHTML =
+                skill.websites
+                    ? marked.parse(
+                        skill.websites
+                    )
+                    : "";
+
+
+            if (skill.image) {
+
+                detailsImage.src =
+                    skill.image;
+
+                detailsImage.style.display =
+                    "block";
+
+            } else {
+
+                detailsImage.style.display =
+                    "none";
+
+            }
+
+
+            highlightConnections(
+                skill.id
+            );
+
+        }
+
+
+
+        /* =========================================================
+           HIGHLIGHT CONNECTIONS
+        ========================================================= */
+
+        function highlightConnections(
+            selectedId
+        ) {
+
+            document
+                .querySelectorAll(".skill-node")
+                .forEach(node => {
+
+                    const nodeId =
+                        node.dataset.id;
+
+
+                    const connected =
+                        nodeId === selectedId ||
+                        isConnected(
+                            selectedId,
+                            nodeId
+                        );
+
+
+                    node.classList.toggle(
+                        "selected",
+                        nodeId === selectedId
+                    );
+
+
+                    node.classList.toggle(
+                        "dimmed",
+                        !connected
+                    );
+
+                });
+
+
+            document
+                .querySelectorAll(".connection")
+                .forEach(line => {
+
+                    const connected =
+                        line.dataset.from === selectedId ||
+                        line.dataset.to === selectedId;
+
+
+                    line.classList.toggle(
+                        "highlighted",
+                        connected
+                    );
+
+                });
+
+        }
+
+
+
+        function isConnected(
+            firstId,
+            secondId
+        ) {
+
+            const first =
+                skillMap.get(firstId);
+
+
+            const second =
+                skillMap.get(secondId);
+
+
+            if (!first || !second) {
+                return false;
+            }
+
+
+            return (
+                first.connections.includes(
+                    secondId
+                ) ||
+                second.connections.includes(
+                    firstId
+                )
+            );
+
+        }
+
+
+
+        /* =========================================================
+           CLEAR SELECTION
+        ========================================================= */
+
+        function clearSelection() {
+
+            detailsPanel.classList.remove(
+                "visible"
+            );
+
+
+            document
+                .querySelectorAll(".skill-node")
+                .forEach(node => {
+
+                    node.classList.remove(
+                        "selected"
+                    );
+
+                    node.classList.remove(
+                        "dimmed"
+                    );
+
+                });
+
+
+            document
+                .querySelectorAll(".connection")
+                .forEach(line => {
+
+                    line.classList.remove(
+                        "highlighted"
+                    );
+
+                });
+
+        }
+
+
+        graphViewport.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target.closest(
+                        ".skill-node"
+                    )
+                ) {
+                    return;
+                }
+
+
+                clearSelection();
+
+            }
+        );
+
+
+        detailsClose.addEventListener(
+            "click",
+            event => {
+
+                event.stopPropagation();
+
+                clearSelection();
+
+            }
+        );
+
+
+
+        /* =========================================================
+           ESCAPE HTML
+        ========================================================= */
+
+        function escapeHtml(value) {
+
+            const div =
+                document.createElement("div");
+
+
+            div.textContent =
+                value ?? "";
+
+
+            return div.innerHTML;
+
+        }
+
+
+
+        /* =========================================================
+           START
+        ========================================================= */
+
+        loadSkills();
+
+    </script>
+
+
+    <script src="tooltips.js"></script>
+
+</body>
+
+</html>
