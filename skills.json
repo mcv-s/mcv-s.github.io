@@ -152,9 +152,38 @@
         "otherData": []
     },
     {
-        "name": "3D Modeling",
+        "name": "Animation",
+        "id": "animation",
+        "shortDescription": "Like 3D but worse",
+        "longDescription": "I like animating things. By now maybe you've learned I like a lot of digital stuff.",
+        "image": "",
+        "icon": "video",
+        "websites": "",
+        "learnedPercentage": "???",
+        "connections": [
+            "WCU",
+            "blender"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "Cavalry",
+        "id": "cavalry",
+        "shortDescription": "Smooshed 3D animation",
+        "longDescription": "[Cavalry](https://cavalry.studio/) is my favorite 2D animation tool.",
+        "image": "",
+        "icon": "video",
+        "websites": "",
+        "learnedPercentage": "???",
+        "connections": [
+            "animation"
+        ],
+        "otherData": []
+    },
+    {
+        "name": "3D Modeling + Engineering",
         "id": "3dModeling",
-        "shortDescription": "Like 2D but better",
+        "shortDescription": "Physical things",
         "longDescription": "Barely started over here but it sounds fun",
         "image": "",
         "icon": "cube-focus",
@@ -261,7 +290,7 @@
         "date": "",
         "icon": "paint-brush",
         "websites": "",
-        "learnedPercentage": "60",
+        "learnedPercentage": "50",
         "connections": [
             "graphicDesign"
         ],
@@ -276,7 +305,7 @@
         "date": "",
         "icon": "paint-brush",
         "websites": "",
-        "learnedPercentage": "60",
+        "learnedPercentage": "80",
         "connections": [
             "graphicDesign"
         ],
