@@ -812,7 +812,9 @@ style.textContent = `
 
         width: 100%;
 
-        height: 150px;
+        aspect-ratio: 97 / 60;
+
+        height: auto;
 
         object-fit: cover;
 
