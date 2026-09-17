@@ -63,6 +63,19 @@
         "tags": "web site"
     },
     {
+        "name": "Redirect",
+        "shortDescription": "Silly name for a redirect site",
+        "longDescription": "I got bored of using Tinyurl . . . and then not being able to make changes to the urls. \nSo I made this.",
+        "image": "portfolio-images/Redirect-Wide.png",
+        "image-cover": "portfolio-images/Redirect-Cover.png",
+        "date": "2026-09-17",
+        "github": "https://github.com/mcv-s/redirect",
+        "website": "https://mcv-s.github.io/redirect/",
+        "aiPercentage": "100",
+        "aiExplanation": "It's so simple . . . \nI should've done it myself :(",
+        "tags": "redirect site direct replace link shorten"
+    },
+    {
         "name": "Movie List",
         "shortDescription": "Most of the movies I've watched, ranked",
         "longDescription": "I got bored of using Apple Notes to store my movie ranking lists, so I had AI write this website. It uses an API to try and get data about the movie. Just don't use dates in the names :D - feel free to fork it on Github if you want to make your own!",
