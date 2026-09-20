@@ -6,6 +6,8 @@
     --background-color: #ffffff;
     --heading-color: #1e1e1e;
     --accent-color: #AA4D04;
+    --text_2: #5B665B;
+    --modal-bg: #ffffffb6;
 
     --content-width: 500px;
     --page-padding: 20px;
@@ -17,6 +19,8 @@
         --background-color: #ffffff;
         --heading-color: #1e1e1e;
         --accent-color: #AA4D04;
+        --text_2: #5B665B;
+        --modal-bg: #ffffffb6;
 
         --content-width: 500px;
         --page-padding: 20px;
@@ -31,6 +35,8 @@
         --background-color: #161616;
         --heading-color: #E0E0E0;
         --accent-color: #AA4D04;
+        --text_2: #5B665B;
+        --modal-bg: #111111b6;
 
         --content-width: 500px;
         --page-padding: 20px;
@@ -49,6 +55,8 @@
     --background-color: #ffffff;
     --heading-color: #1e1e1e;
     --accent-color: #AA4D04;
+    --text_2: #424242;
+    --modal-bg: #ffffffb6;
 
     --content-width: 500px;
     --page-padding: 20px;
@@ -63,10 +71,20 @@
     --background-color: #161616;
     --heading-color: #E0E0E0;
     --accent-color: #AA4D04;
+    --text_2: #5B665B;
+    --modal-bg: #111111b6;
 
     --content-width: 500px;
     --page-padding: 20px;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -212,7 +230,8 @@ body {
 
 h1,
 h2,
-h3 {
+h3,
+.project-name {
     color: var(--heading-color);
 }
 
@@ -227,7 +246,7 @@ h2 {
 h4 {
     margin-top: 2px;
 
-    color: #5B665B;
+    color: var(--text_2);
     font-weight: 100;
 }
 
@@ -357,17 +376,18 @@ a {
 
 }
 
+button [type="submit"] {
+    color: white;
+}
+
 @media (prefers-color-scheme: light) {
     [aria-label="Email Me"] div {
         background: white !important;
     }
 }
 
+
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
     color: #888;
-}
-
-button [type="submit"] {
-    color: white;
 }

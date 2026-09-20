@@ -923,7 +923,7 @@ style.textContent = `
 
         box-sizing: border-box;
 
-        background-color: #111111b6;
+        background-color: var(--modal-bg);
 
         border: 1.5px solid rgba(255, 255, 255, 0.05);
 
