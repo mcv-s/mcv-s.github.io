@@ -3,6 +3,63 @@
     ======================================== */
 
 :root {
+    --background-color: #ffffff;
+    --heading-color: #1e1e1e;
+    --accent-color: #AA4D04;
+
+    --content-width: 500px;
+    --page-padding: 20px;
+}
+
+
+@media (prefers-color-scheme: light) {
+    :root:not([data-theme]) {
+        --background-color: #ffffff;
+        --heading-color: #1e1e1e;
+        --accent-color: #AA4D04;
+
+        --content-width: 500px;
+        --page-padding: 20px;
+    }
+}
+
+
+
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --background-color: #161616;
+        --heading-color: #E0E0E0;
+        --accent-color: #AA4D04;
+
+        --content-width: 500px;
+        --page-padding: 20px;
+    }
+}
+
+
+
+
+
+/* =========================================================
+   EXPLICIT LIGHT
+   ========================================================= */
+
+:root[data-theme="light"] {
+    --background-color: #ffffff;
+    --heading-color: #1e1e1e;
+    --accent-color: #AA4D04;
+
+    --content-width: 500px;
+    --page-padding: 20px;
+}
+
+
+/* =========================================================
+   EXPLICIT DARK
+   ========================================================= */
+
+:root[data-theme="dark"] {
     --background-color: #161616;
     --heading-color: #E0E0E0;
     --accent-color: #AA4D04;
@@ -10,6 +67,8 @@
     --content-width: 500px;
     --page-padding: 20px;
 }
+
+
 
 
 
@@ -261,6 +320,11 @@ a {
 
 
 
+
+
+
+
+
 [static-blur-panel] {
     position: relative;
     z-index: 1;
@@ -277,4 +341,33 @@ a {
     -webkit-backdrop-filter: blur(8px);
 
     transition: border-color, backdrop-filter 0.4s ease;
+}
+
+
+
+
+
+.contact-form textarea,
+.contact-form input {
+    border: 1px solid #3a3a3a;
+}
+
+.contact-form button .ph {
+    margin-top: 0% !important;
+
+}
+
+@media (prefers-color-scheme: light) {
+    [aria-label="Email Me"] div {
+        background: white !important;
+    }
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #888;
+}
+
+button [type="submit"] {
+    color: white;
 }

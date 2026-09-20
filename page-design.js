@@ -162,6 +162,11 @@
         x: 0.5,
         y: 0.5,
 
+        viewportX: 0.5,
+        viewportY: 0.5,
+
+        inside: false,
+
         targetX: 0.5,
         targetY: 0.5,
 
@@ -240,6 +245,11 @@
      * coordinates relative to the canvas.
      */
     window.addEventListener("pointermove", e => {
+        mouse.inside = true;
+
+        mouse.viewportX = e.clientX;
+        mouse.viewportY = e.clientY;
+
         const canvasTop =
             getCanvasDocumentTop();
 
@@ -262,6 +272,14 @@
 
         mouse.targetY =
             canvasY / height;
+    });
+
+    window.addEventListener("pointerleave", () => {
+        mouse.inside = false;
+    });
+
+    window.addEventListener("blur", () => {
+        mouse.inside = false;
     });
 
     /*
@@ -350,7 +368,7 @@
 
                         const parent =
                             node.parentElement;
-                            
+
                         if (parent.closest(".right-top")) {
                             return NodeFilter.FILTER_REJECT;
                         }
@@ -620,6 +638,19 @@
         const my =
             mouse.y * height;
 
+        const edgeClearance =
+            Math.min(
+                window.innerWidth,
+                window.innerHeight
+            ) *
+            0.05;
+
+        const mouseTooCloseToEdge =
+            mouse.viewportX < edgeClearance ||
+            mouse.viewportX > window.innerWidth - edgeClearance ||
+            mouse.viewportY < edgeClearance ||
+            mouse.viewportY > window.innerHeight - edgeClearance;
+
         /*
          * Visible viewport in canvas coordinates.
          *
@@ -801,6 +832,19 @@
                     visibleHeight
                 );
             }
+        }
+
+        /*
+         * Existing pixels have already faded above. When the pointer
+         * is outside the viewport, skip only the new field generation.
+         */
+        if (
+            !mouse.inside ||
+            mouseTooCloseToEdge
+        ) {
+            ctx.shadowBlur = 0;
+            requestAnimationFrame(draw);
+            return;
         }
 
         /*
