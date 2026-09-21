@@ -1,17 +1,5 @@
 [
     {
-        "name": "Hidden Project",
-        "shortDescription": "One only visible on this projects page",
-        "longDescription": "A long description about the project itself",
-        "image": "portfolio-images/Website-Wide.png",
-        "image-cover": "portfolio-images/Default.svg",
-        "date": "2026-07-22",
-        "aiPercentage": "45",
-        "aiExplanation": "I completely coded the base site, \n then caved and used AI for some of it.",
-        "featured": "false",
-        "tags": "web site"
-    },
-    {
         "name": "Folio",
         "shortDescription": "Ultimate New Tab",
         "longDescription": "Folio is a browser extension for chromium (Edge, Chrome, Brave) which allows customization of the new tab page.\n It was originally created for personal use because browser new tabs have too much junk on them.",
@@ -134,6 +122,16 @@
         "aiExplanation": "Completely AI made",
         "featured": "true",
         "tags": "dev development"
+    },
+    {
+        "name": "Easter Egg",
+        "shortDescription": "A project only visible here",
+        "longDescription": "You found it . . . not that much happens now . . . ",
+        "image": "portfolio-images/Default.svg",
+        "image-cover": "portfolio-images/Default.svg",
+        "date": "2026-07-22",
+        "featured": "false",
+        "tags": "easter egg"
     },
     {
         "name": "File Sorter",
