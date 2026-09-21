@@ -68,6 +68,20 @@
         "tags": "web site"
     },
     {
+        "name": "Project Manager+",
+        "shortDescription": "A distinctly interesting project manager PWA",
+        "longDescription": "Not designed for public use or discovery: a PWA I made for easily opening, creating, observing, and taking note of all my projects.",
+        "image": "portfolio-images/Project-Manager-Plus.png",
+        "image-cover": "portfolio-images/Project-Manager-Plus.png",
+        "date": "2026-09-21",
+        "aiPercentage": "99",
+        "aiExplanation": "AI was most definitely used in this one",
+        "github": "https://github.com/mcv-s/project-manager-plus",
+        "website": "https://mcv-s.github.io/project-manager-plus/",
+        "featured": "false",
+        "tags": "util tools"
+    },
+    {
         "name": "Redirect",
         "shortDescription": "Silly name for a redirect site",
         "longDescription": "I got bored of using Tinyurl . . . and then not being able to make changes to the urls. \nSo I made this.",
@@ -80,6 +94,18 @@
         "aiExplanation": "It's so simple . . . \nI should've done it myself :(",
         "featured": "true",
         "tags": "redirect site direct replace link shorten"
+    },
+    {
+        "name": "Utils",
+        "shortDescription": "Utility functions for the web + more",
+        "longDescription": "I have lots of websites/tools on the web so I made this repository to act as a place to store them all. Feel free to use my standards if you can figure out how!",
+        "image": "portfolio-images/EZTOOLS-Cover.png",
+        "image-cover": "portfolio-images/EZTOOLS-Cover.png",
+        "date": "2026-09-21",
+        "github": "https://github.com/mcv-s/utils",
+        "website": "https://mcv-s.github.io/utils/",
+        "featured": "false",
+        "tags": "util tools"
     },
     {
         "name": "Movie List",
