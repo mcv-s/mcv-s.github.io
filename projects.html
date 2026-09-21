@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <script src="index-program.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="favicon.png">
+
+
+
+    <title>Projects | MarsChompsVenus</title>
+
+
+
+    <link rel="stylesheet" href="https://mcv-s.github.io/utils/web/brandTheme.css">
+    <link rel="stylesheet" href="https://mcv-s.github.io/utils/web/colorTheme.css">
+
+    <link rel="stylesheet" href="page-design.css">
+
+
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+</head>
+
+<style>
+
+
+</style>
+
+
+
+
+
+
+
+
+
+<body>
+
+    <a href="https://mcv-s.github.io/"> ‹ Back home</a>
+
+    <!-- ========================================
+     MAIN CONTENT
+======================================== -->
+
+    <main class="content">
+
+        <!-- ========================================
+         HEADER
+    ======================================== -->
+
+
+        <div class="hero">
+
+            <header blur-panel>
+
+                <h1 class="site-title">
+                    All my Projects
+                </h1>
+
+                <br>
+
+                <h4 class="desc">
+                    While my main site has my portfolio with my favorite projects, this site has ALL the projects I
+                    think are remotely interesting.
+                </h4>
+
+
+            </header>
+
+
+
+            <div class="scroll-down">
+                ↓ Scroll down ↓
+            </div>
+
+
+        </div>
+
+
+        <style>
+            [animatedText] {
+                animation: textChange 0.4s ease;
+            }
+
+            @keyframes textChange {
+                from {
+                    opacity: 0;
+                    filter: blur(5px);
+                    transform: translateY(3px);
+                }
+
+                to {
+                    opacity: 1;
+                    filter: blur(0);
+                    transform: translateY(0);
+                }
+            }
+
+
+
+            .hero {
+                height: 100vh;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                text-align: center;
+
+                position: relative;
+            }
+
+
+
+            .scroll-down {
+                position: absolute;
+                bottom: 60px;
+
+                opacity: 0;
+                pointer-events: none;
+
+                transition: opacity 0.5s ease;
+            }
+
+            .scroll-down.visible {
+                opacity: 1;
+            }
+
+            .scroll-down.hidden {
+                opacity: 0;
+            }
+
+            @keyframes scrollDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-5px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+
+
+
+
+
+        <script>
+
+
+            const scrollDown = document.querySelector(".scroll-down");
+
+            // Show after 1 second if we're still at the top.
+            setTimeout(() => {
+                if (window.scrollY === 0) {
+                    scrollDown.classList.add("visible");
+                }
+            }, 3000);
+
+            window.addEventListener("scroll", () => {
+                if (window.scrollY === 0) {
+                    scrollDown.classList.add("visible");
+                } else {
+                    scrollDown.classList.remove("visible");
+                }
+            });
+
+
+            const heroHeader = document.querySelector(".hero header");
+
+            heroHeader.addEventListener("mousemove", (event) => {
+                const rect = heroHeader.getBoundingClientRect();
+
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                heroHeader.style.setProperty("--mouse-x", `${x}px`);
+                heroHeader.style.setProperty("--mouse-y", `${y}px`);
+            });
+        </script>
+
+
+
+
+
+
+
+
+        <!-- ========================================
+         PORTFOLIO
+        ======================================== -->
+
+        <section class="portfolio">
+
+            <h2 class="section-title">
+                All my projects:
+            </h2>
+
+            
+            <h4 class="info">
+                <i> Projects, tools, and useful stuff</i>
+            </h4><br>
+
+            <textarea style="padding: 3% 3%;" static-blur-panel class="search-box" placeholder='🔎︎ Search projects...'
+                rows="1"></textarea>
+
+            <br><br>
+
+
+            <!-- Projects -->
+
+
+        </section>
+
+
+        <br><br><br>
+
+    </main>
+
+
+</body>
+
+
+
+
+
+<script src="page-design.js"></script>
+<script src="tooltips.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+</html>

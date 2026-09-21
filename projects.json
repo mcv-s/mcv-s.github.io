@@ -1,5 +1,17 @@
 [
     {
+        "name": "Hidden Project",
+        "shortDescription": "One only visible on this projects page",
+        "longDescription": "A long description about the project itself",
+        "image": "portfolio-images/Website-Wide.png",
+        "image-cover": "portfolio-images/Default.svg",
+        "date": "2026-07-22",
+        "aiPercentage": "45",
+        "aiExplanation": "I completely coded the base site, \n then caved and used AI for some of it.",
+        "featured": "false",
+        "tags": "web site"
+    },
+    {
         "name": "Folio",
         "shortDescription": "Ultimate New Tab",
         "longDescription": "Folio is a browser extension for chromium (Edge, Chrome, Brave) which allows customization of the new tab page.\n It was originally created for personal use because browser new tabs have too much junk on them.",
@@ -10,6 +22,7 @@
         "website": "https://mcv-s.github.io/folio/",
         "aiPercentage": "90",
         "aiExplanation": "Mostly vibe-coded, with some modification by me",
+        "featured": "true",
         "tags": "folio new tab ultimate"
     },
     {
@@ -23,6 +36,7 @@
         "website": "https://mcv-s.github.io/pynugget/",
         "aiPercentage": "90",
         "aiExplanation": "Mostly vibe-coded, with some modification by me",
+        "featured": "true",
         "tags": "python py engine"
     },
     {
@@ -36,6 +50,7 @@
         "website": "https://mcv-s.github.io/markdown-editor-plus/",
         "aiPercentage": "85",
         "aiExplanation": "Another vibe coded tool",
+        "featured": "true",
         "tags": "markdown md .md tool editor"
     },
     {
@@ -49,6 +64,7 @@
         "website": "https://eztools.framer.website/",
         "aiPercentage": "0",
         "aiExplanation": "No AI used",
+        "featured": "true",
         "tags": "tools ez easy"
     },
     {
@@ -60,6 +76,7 @@
         "date": "2026-07-22",
         "aiPercentage": "45",
         "aiExplanation": "I completely coded the base site, \n then caved and used AI for some of it.",
+        "featured": "true",
         "tags": "web site"
     },
     {
@@ -73,6 +90,7 @@
         "website": "https://mcv-s.github.io/redirect/",
         "aiPercentage": "100",
         "aiExplanation": "It's so simple . . . \nI should've done it myself :(",
+        "featured": "true",
         "tags": "redirect site direct replace link shorten"
     },
     {
@@ -86,6 +104,7 @@
         "website": "https://mcv-s.github.io/movieranking/",
         "aiPercentage": "90",
         "aiExplanation": "I used AI to make the site. List by me.",
+        "featured": "true",
         "tags": "movie movies list"
     },
     {
@@ -99,6 +118,7 @@
         "website": "https://mcv-s.github.io/projectgraveyard/",
         "aiPercentage": "95",
         "aiExplanation": "Mostly vibe-coded",
+        "featured": "true",
         "tags": "project graveyard"
     },
     {
@@ -112,6 +132,7 @@
         "website": "https://mcv-s.github.io/keyframe-function-editor/",
         "aiPercentage": "100",
         "aiExplanation": "Completely AI made",
+        "featured": "true",
         "tags": "dev development"
     },
     {
@@ -125,6 +146,7 @@
         "website": "https://mcv-s.github.io/file-sorter/",
         "aiPercentage": "0",
         "aiExplanation": "100% Human Generated Slop \n AI Used for research only",
+        "featured": "true",
         "tags": "file files sort sorter directory noAI"
     },
     {
@@ -138,6 +160,7 @@
         "website": "https://mcv-s.github.io/dynamic-timer/",
         "aiPercentage": "0",
         "aiExplanation": "100% Human Generated Slop",
+        "featured": "true",
         "tags": "human timer time noAI"
     },
     {
@@ -151,6 +174,7 @@
         "website": "https://mcv-s.github.io/timer/",
         "aiPercentage": "99",
         "aiExplanation": "Basically all AI",
+        "featured": "true",
         "tags": "human timer time"
     }
 ]

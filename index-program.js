@@ -7,8 +7,8 @@ const postsLink = document.querySelector("#postsLink");
 const langsLink = document.querySelector("#langsLink");
 const skillsLink = document.querySelector("#skillsLink");
 
-
-
+let pageLocation = window.location.href;
+const isMainPage = !pageLocation.includes("/projects");
 
 
 async function updateCounter() {
@@ -31,12 +31,6 @@ async function updateCounter() {
     }
 
 }
-
-updateCounter();
-
-
-
-
 
 
 async function updateStats() {
@@ -76,7 +70,19 @@ async function updateStats() {
 
 }
 
-updateStats();
+
+if (isMainPage) {
+    updateCounter();
+    updateStats();
+};
+
+
+
+
+
+
+
+
 
 
 document.querySelectorAll("[animatedText]").forEach(element => {
@@ -95,13 +101,16 @@ document.querySelectorAll("[animatedText]").forEach(element => {
 
 });
 
+
+
+
+
+
+
+
 // ========================================
 // LOAD PROJECTS
 // ========================================
-
-
-
-
 
 async function loadProjects() {
 
@@ -120,6 +129,18 @@ async function loadProjects() {
         }
 
         const projects = await response.json();
+
+
+        // ========================================
+        // FILTER PROJECTS FOR THIS PAGE
+        // ========================================
+
+        const projectsToLoad =
+            isMainPage
+                ? projects.filter(
+                    project => project.featured === "true"
+                )
+                : projects;
 
 
         // ========================================
@@ -620,7 +641,9 @@ async function loadProjects() {
         // INITIAL PROJECTS
         // ========================================
 
-        renderProjects(projects);
+        renderProjects(
+            projectsToLoad
+        );
 
 
         // ========================================
@@ -650,7 +673,7 @@ async function loadProjects() {
                     if (!search) {
 
                         renderProjects(
-                            projects
+                            projectsToLoad
                         );
 
                         return;
@@ -671,7 +694,7 @@ async function loadProjects() {
                     // ========================================
 
                     const filteredProjects =
-                        projects.filter(
+                        projectsToLoad.filter(
                             project => {
 
                                 const tags =
@@ -741,6 +764,10 @@ async function loadProjects() {
     }
 
 }
+
+
+
+
 
 
 // ========================================
@@ -1114,6 +1141,32 @@ style.textContent = `
 
 `;
 
+
+if (!isMainPage) {
+
+    const extraStyle = document.createElement("style");
+
+    extraStyle.textContent = `
+
+
+        .project-list {
+
+        display: grid;
+
+        grid-template-columns: repeat(4, 1fr) !important;
+
+        gap: 15px;
+
+        width: 200% !important;
+
+    }
+
+
+    `;
+
+    document.head.appendChild(extraStyle);
+
+}
 
 document.head.appendChild(style);
 
