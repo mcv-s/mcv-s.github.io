@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Redirecting...</title>
+
+    <link rel="stylesheet" href="page-design.css">
+
+    <style>
+        body {
+            margin: 0;
+            display: grid;
+            place-items: center;
+            font-family: system-ui, sans-serif;
+            background: #fff;
+            color: #111;
+            min-height: 90vh;
+        }
+
+        p {
+            opacity: 0.6;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #111;
+                color: #fff;
+            }
+        }
+
+        #main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        [blur-panel] {
+            padding: 3% !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="main" blur-panel>
+        <p id="message">Checking for a redirect . . .</p>
+    </div>
+
+
+    <script>
+        async function redirect() {
+            const message = document.getElementById("message");
+            const main = document.getElementById("main");
+
+            try {
+                /*
+                 * GitHub Pages project site:
+                 * https://mcv-s.github.io/redirect/
+                 *
+                 * Get everything after /redirect/
+                 */
+                const basePath = "/";
+
+                let slug = window.location.pathname;
+
+                if (slug.startsWith(basePath)) {
+                    slug = slug.substring(basePath.length);
+                }
+
+                slug = slug.replace(/^\/+|\/+$/g, "");
+
+                if (!slug) {
+                    message.textContent = "No redirect code.";
+                    return;
+                }
+
+                slug = decodeURIComponent(slug);
+
+                /*
+                 * Load the public Supabase configuration.
+                 */
+                const configResponse = await fetch(
+                    `${basePath}SUPABASE.json`,
+                    {
+                        cache: "no-store"
+                    }
+                );
+
+                if (!configResponse.ok) {
+                    throw new Error(
+                        `SUPABASE.json returned ${configResponse.status}`
+                    );
+                }
+
+                const supabase = await configResponse.json();
+
+                /*
+                 * Look up the slug.
+                 */
+                const response = await fetch(
+                    `${supabase.url}/rest/v1/RedirectLinks` +
+                    `?slug=eq.${encodeURIComponent(slug)}` +
+                    `&select=url` +
+                    `&limit=1`,
+                    {
+                        headers: {
+                            "apikey": supabase.key,
+                            "Authorization": `Bearer ${supabase.key}`
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(
+                        `Supabase request failed: ${response.status}`
+                    );
+                }
+
+                const rows = await response.json();
+
+                if (!rows.length || !rows[0].url) {
+                    main.innerHTML = `<h1>404</h1>
+                    This page doesn't exist . . . <br><br>
+                    <a href="/"><b>Back Home</b></a>`;
+                    document.title = "Nonexistent page | MarsChompsVenus"
+                    return;
+                }
+
+                window.location.replace(rows[0].url);
+
+            } catch (error) {
+                console.error(error);
+                message.textContent = "Redirect failed.";
+            }
+        }
+
+        redirect();
+    </script>
+
+</body>
+
+
+<script src="page-design.js"></script>
+<script src="tooltips.js"></script>
+
+</html>
