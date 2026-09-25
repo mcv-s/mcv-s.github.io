@@ -8,6 +8,7 @@
     <title>Redirecting...</title>
 
     <link rel="stylesheet" href="page-design.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
         body {
@@ -37,6 +38,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            max-width: 50vw;
         }
 
         [blur-panel] {
@@ -123,6 +125,7 @@
 
                 const rows = await response.json();
 
+
                 if (!rows.length || !rows[0].url) {
                     main.innerHTML = `<h1>404</h1>
                     This page doesn't exist . . . <br><br>
@@ -131,7 +134,49 @@
                     return;
                 }
 
-                window.location.replace(rows[0].url);
+                const redirectUrl = rows[0].url
+
+
+
+                function updateMessage(countdownSeconds = 6) {
+                    main.innerHTML = `<h1>Redirect found!</h1>
+                    In ${countdownSeconds} seconds, you will be redirected to <br><br>
+                    <a href="${rows[0].url}"><b>${rows[0].url}</b></a><br><br>
+                    <h3 data-tooltip="Because I didn't make the site you're redirecting to.">Why am I seeing this? <i class="ph ph-info"></i></h3 >
+                    <br><br><a href="/"><b>Back Home</b></a>`;
+                    document.title = `Redirecting in ${countdownSeconds} . . . | MarsChompsVenus`;
+                };
+
+
+
+
+
+
+                if (redirectUrl.includes("mcv-s.github.io")) {
+                    window.location.replace(rows[0].url);
+                } else {
+                    let seconds = 15;
+                    updateMessage(seconds)
+
+                    const countdown = setInterval(() => {
+                        seconds--;
+
+                        if (seconds <= 0) {
+                            clearInterval(countdown);
+                            window.location.replace(rows[0].url);
+                        } else {
+                            updateMessage(seconds)
+                        }
+                    }, 1000);
+                }
+
+
+
+
+
+
+
+
 
             } catch (error) {
                 console.error(error);
@@ -146,6 +191,6 @@
 
 
 <script src="page-design.js"></script>
-<script src="tooltips.js"></script>
+<script src="https://mcv-s.github.io/utils/web/tooltips.js"></script>
 
 </html>
