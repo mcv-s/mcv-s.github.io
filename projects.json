@@ -14,6 +14,20 @@
         "tags": "folio new tab ultimate"
     },
     {
+        "name": "Extensify",
+        "shortDescription": "Useful browser addons",
+        "longDescription": "Extensify is a collection of useful browser addons that enhance your browsing experience. \n It's designed to be a place for all of the things that are nice to have in the browser but don't need a whole browser extension. It's also versatile - install it once and all the new addons will be available without reinstallation.",
+        "image": "portfolio-images/Extensify-Wide-2.png",
+        "image-cover": "portfolio-images/Extensify-Cover.png",
+        "date": "2026-10-19",
+        "github": "https://github.com/mcv-s/extensify",
+        "website": "https://mcv-s.github.io/extensify/",
+        "aiPercentage": "75",
+        "aiExplanation": "Extensify itself is mostly AI but the addons are mostly human made, with some AI assistance",
+        "featured": "true",
+        "tags": "extensify browser addons"
+    },
+    {
         "name": "Pynugget",
         "shortDescription": "Python-based browser game engine",
         "longDescription": "Pynugget is a python-based in-browser alternative to [scratch](https://scratch.mit.edu/). It supports assets and shareable project files!",
